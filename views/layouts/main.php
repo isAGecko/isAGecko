@@ -118,7 +118,7 @@ AppAsset::register($this);
     <div class="container">
         <p class="pull-left">&copy; Gecko Inc <?= date('Y') ?></p>
 
-        <p class="pull-right">Develop By Abid </p>
+        <p class="pull-right">Develop By abid </p>
     </div>
 </footer>
 
