@@ -84,7 +84,7 @@ AppAsset::register($this);
     echo Nav::widget([
         'options' => ['class' => 'nav nav-pills navbar-right'],
         'items' => [
-            ['label' => 'Home','options'=>['class'=>'nav-link'], 'url' => ['/site']],
+            ['label' => 'Home','options'=>['class'=>'nav-link'], 'url' => ['/site/index']],
             ['label' => 'History','options'=>['class'=>'nav-link'], 'url' => ['/pegawai/index']],
             ['label' => 'Absensi','options'=>['class'=>'nav-link'], 'url' => ['/departemen/index']],
             ['label' => 'History','options'=>['class'=>'nav-link'], 'url' => ['/absensi/index']],
