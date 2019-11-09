@@ -21,54 +21,9 @@ AppAsset::register($this);
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <?php $this->registerCsrfMetaTags() ?>
     <title><?= Html::encode($this->title) ?></title>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <?php $this->head() ?>
-    <style>
-        @media only screen and (max-width: 768px) {
-        /* For mobile phones: */
-        [class*="col-md-4"] {
-            margin-top: -70px;       
-        }
-        [class*="box-photo"] {
-            width: auto;
-        }[class*="box-photo"] #canvas{
-            width: 100%;
-        }
-        }.fontku{
-            font-family: 'google_font';
-        }
-        .nav-pills > li.active > a, .nav-pills > li.active > a:hover, .nav-pills > li.active > a:focus {
-            color: #fff;
-            background-color: #00a2e9;
-            border-radius: 0px;
-        
-        }.nav-pills > li > a {
-            border-radius: 0px; 
 
-        }.nav-pills{
-            margin-top: 5px;
-        }.navbar-toggle{
-            background-color: #00a2e9;
-        }
-        .tombol-ambil-gambar{
-            background: none;
-            color: gainsboro;
-            border: none;
-            padding: 0;
-            font: inherit;
-            margin-top: 10px;
-            cursor: pointer;
-            outline: inherit;
-            margin-left: auto;
-            margin-right: auto;
-            display: block;
-        }
-        select {text-align-last:center; }   
-        .top{
-            margin-top: 10px;
-        }.wrap > .container {
-            padding: 0px 0px 0px;
-        }
-    </style>
 </head>
 <body>
 <?php $this->beginBody() ?>
@@ -126,60 +81,3 @@ AppAsset::register($this);
 </body>
 </html>
 <?php $this->endPage() ?>
-<script type="text/javascript">
-    var kanvas=$('#canvas');
-    kanvas.hide();
-    // seleksi elemen video
-    var video = document.querySelector("#video-webcam");
-    // minta izin user
-    navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia || navigator.msGetUserMedia || navigator.oGetUserMedia;
-    // jika user memberikan izin
-    if (navigator.getUserMedia) {
-        // jalankan fungsi handleVideo, dan videoError jika izin ditolak
-        navigator.getUserMedia({ video: true }, handleVideo, videoError);
-    }
-    // fungsi ini akan dieksekusi jika  izin telah diberikan
-    function handleVideo(stream) {
-        video.srcObject = stream;
-    }
-    // fungsi ini akan dieksekusi kalau user menolak izin
-    function videoError(e) {
-        // do something
-        alert("Izinkan menggunakan webcam untuk demo!")
-    }
-    // Draw image
-    var context = canvas.getContext('2d');
-    capture.addEventListener("click", function() {
-        var logo=$('#logo-kadal');
-        var ambil=$('#ambil-gambar');
-        var kanvas=$('#canvas');
-        logo.hide();
-        ambil.hide();
-        kanvas.show();
-        context.drawImage(video, 0, 0, 380, 300);
-    });
-    $(document).ready(function() {
-        if (navigator.geolocation) {
-            navigator.geolocation.getCurrentPosition(showPosition);
-        } else {
-            alert("Geolocation is not supported by this browser.");
-        }
-        function showPosition(position) {
-            document.getElementById("latitude").value = position.coords.latitude;
-            document.getElementById("longitude").value = position.coords.longitude;
-
-        }
-        $('#textarea').hide();
-    $('#select').change(function() {
-    var textarea = $('textarea');
-    var select = $('#select').val();
-    console.log(select);
-        if (select == 'Izin') {
-            textarea.show();
-        }
-        if (select == 'Masuk') {
-            textarea.hide();
-        }
-    });
-    });
-</script>
