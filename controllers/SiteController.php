@@ -9,6 +9,8 @@ use yii\web\Response;
 use yii\filters\VerbFilter;
 use app\models\LoginForm;
 use app\models\ContactForm;
+use app\models\EntryForm;
+
 
 class SiteController extends Controller
 {
@@ -135,5 +137,20 @@ class SiteController extends Controller
     public function actionAbout()
     {
         return $this->render('about');
+    }
+    public function actionEntry()
+    {
+        $model = new EntryForm();
+
+        if ($model->load(Yii::$app->request->post()) && $model->validate()) {
+            // data yang valid diperoleh pada $model
+
+            // lakukan sesuatu terhadap $model di sini ...
+
+            return $this->render('entry-confirm', ['model' => $model]);
+        } else {
+            // menampilkan form pada halaman, ada atau tidaknya kegagalan validasi tidak masalah
+            return $this->render('entry', ['model' => $model]);
+        }
     }
 }
