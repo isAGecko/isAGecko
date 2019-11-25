@@ -9,14 +9,16 @@ use Yii;
  *
  * @property int $ID_ABSENSI
  * @property string $ID_PEGAWAI
- * @property int $POINT_ABSEN
  * @property string $TANGGAL
  * @property string $JAM
- * @property string $DESKRIPSI
  * @property string $TERLAMBAT
+ * @property string $KETERANGAN
+ * @property string $DETAIL
  * @property string $FOTO
+ * @property int $POINT
  *
  * @property Pegawai $pEGAWAI
+ * @property Pegawai[] $pegawais
  */
 class Absensi extends \yii\db\ActiveRecord
 {
@@ -34,12 +36,13 @@ class Absensi extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['POINT_ABSEN'], 'integer'],
+            [['ID_ABSENSI'], 'required'],
+            [['ID_ABSENSI', 'POINT'], 'integer'],
             [['TANGGAL', 'JAM', 'TERLAMBAT'], 'safe'],
-            [['DESKRIPSI'], 'required'],
             [['ID_PEGAWAI'], 'string', 'max' => 11],
-            [['DESKRIPSI'], 'string', 'max' => 10000],
-            [['FOTO'], 'string', 'max' => 225],
+            [['KETERANGAN', 'DETAIL'], 'string', 'max' => 1000],
+            [['FOTO'], 'string', 'max' => 100],
+            [['ID_ABSENSI'], 'unique'],
             [['ID_PEGAWAI'], 'exist', 'skipOnError' => true, 'targetClass' => Pegawai::className(), 'targetAttribute' => ['ID_PEGAWAI' => 'ID_PEGAWAI']],
         ];
     }
@@ -52,12 +55,13 @@ class Absensi extends \yii\db\ActiveRecord
         return [
             'ID_ABSENSI' => 'Id Absensi',
             'ID_PEGAWAI' => 'Id Pegawai',
-            'POINT_ABSEN' => 'Point Absen',
             'TANGGAL' => 'Tanggal',
             'JAM' => 'Jam',
-            'DESKRIPSI' => 'Deskripsi',
             'TERLAMBAT' => 'Terlambat',
+            'KETERANGAN' => 'Keterangan',
+            'DETAIL' => 'Detail',
             'FOTO' => 'Foto',
+            'POINT' => 'Point',
         ];
     }
 
@@ -67,5 +71,13 @@ class Absensi extends \yii\db\ActiveRecord
     public function getPEGAWAI()
     {
         return $this->hasOne(Pegawai::className(), ['ID_PEGAWAI' => 'ID_PEGAWAI']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getPegawais()
+    {
+        return $this->hasMany(Pegawai::className(), ['ID_ABSENSI' => 'ID_ABSENSI']);
     }
 }

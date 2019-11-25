@@ -8,9 +8,11 @@ use Yii;
  * This is the model class for table "point".
  *
  * @property int $ID_POINT
- * @property int $POINTS
+ * @property string $ID_PEGAWAI
+ * @property int $TOTAL_POINT
  *
  * @property Pegawai[] $pegawais
+ * @property Pegawai $pEGAWAI
  */
 class Point extends \yii\db\ActiveRecord
 {
@@ -29,8 +31,10 @@ class Point extends \yii\db\ActiveRecord
     {
         return [
             [['ID_POINT'], 'required'],
-            [['ID_POINT', 'POINTS'], 'integer'],
+            [['ID_POINT', 'TOTAL_POINT'], 'integer'],
+            [['ID_PEGAWAI'], 'string', 'max' => 11],
             [['ID_POINT'], 'unique'],
+            [['ID_PEGAWAI'], 'exist', 'skipOnError' => true, 'targetClass' => Pegawai::className(), 'targetAttribute' => ['ID_PEGAWAI' => 'ID_PEGAWAI']],
         ];
     }
 
@@ -41,7 +45,8 @@ class Point extends \yii\db\ActiveRecord
     {
         return [
             'ID_POINT' => 'Id Point',
-            'POINTS' => 'Points',
+            'ID_PEGAWAI' => 'Id Pegawai',
+            'TOTAL_POINT' => 'Total Point',
         ];
     }
 
@@ -51,5 +56,13 @@ class Point extends \yii\db\ActiveRecord
     public function getPegawais()
     {
         return $this->hasMany(Pegawai::className(), ['ID_POINT' => 'ID_POINT']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getPEGAWAI()
+    {
+        return $this->hasOne(Pegawai::className(), ['ID_PEGAWAI' => 'ID_PEGAWAI']);
     }
 }

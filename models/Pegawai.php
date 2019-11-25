@@ -8,18 +8,22 @@ use Yii;
  * This is the model class for table "pegawai".
  *
  * @property string $ID_PEGAWAI
- * @property int $ID_DEPARTEMEN
  * @property int $ID_POINT
+ * @property int $ID_JABATAN
+ * @property int $ID_ABSENSI
  * @property string $NAMA_PEGAWAI
- * @property string $TANGGAL_LAHIR
+ * @property string $NOMOR_TELP
  * @property string $ALAMAT
- * @property int $TAHUN_MASUK
- * @property string $NO_TELP
+ * @property string $EMAIL
+ * @property string $GENDER
+ * @property string $PASSWORD
  *
  * @property Absensi[] $absensis
- * @property Departemen[] $departemens
- * @property Departemen $dEPARTEMEN
+ * @property Jabatan[] $jabatans
+ * @property Jabatan $jABATAN
+ * @property Absensi $aBSENSI
  * @property Point $pOINT
+ * @property Point[] $points
  */
 class Pegawai extends \yii\db\ActiveRecord
 {
@@ -38,14 +42,13 @@ class Pegawai extends \yii\db\ActiveRecord
     {
         return [
             [['ID_PEGAWAI'], 'required'],
-            [['ID_DEPARTEMEN', 'ID_POINT', 'TAHUN_MASUK'], 'integer'],
-            [['TANGGAL_LAHIR'], 'safe'],
+            [['ID_POINT', 'ID_JABATAN', 'ID_ABSENSI'], 'integer'],
             [['ID_PEGAWAI'], 'string', 'max' => 11],
-            [['NAMA_PEGAWAI'], 'string', 'max' => 225],
-            [['ALAMAT'], 'string', 'max' => 1000],
-            [['NO_TELP'], 'string', 'max' => 15],
+            [['NAMA_PEGAWAI', 'ALAMAT', 'EMAIL', 'GENDER', 'PASSWORD'], 'string', 'max' => 100],
+            [['NOMOR_TELP'], 'string', 'max' => 12],
             [['ID_PEGAWAI'], 'unique'],
-            [['ID_DEPARTEMEN'], 'exist', 'skipOnError' => true, 'targetClass' => Departemen::className(), 'targetAttribute' => ['ID_DEPARTEMEN' => 'ID_DEPARTEMEN']],
+            [['ID_JABATAN'], 'exist', 'skipOnError' => true, 'targetClass' => Jabatan::className(), 'targetAttribute' => ['ID_JABATAN' => 'ID_JABATAN']],
+            [['ID_ABSENSI'], 'exist', 'skipOnError' => true, 'targetClass' => Absensi::className(), 'targetAttribute' => ['ID_ABSENSI' => 'ID_ABSENSI']],
             [['ID_POINT'], 'exist', 'skipOnError' => true, 'targetClass' => Point::className(), 'targetAttribute' => ['ID_POINT' => 'ID_POINT']],
         ];
     }
@@ -57,13 +60,15 @@ class Pegawai extends \yii\db\ActiveRecord
     {
         return [
             'ID_PEGAWAI' => 'Id Pegawai',
-            'ID_DEPARTEMEN' => 'Id Departemen',
             'ID_POINT' => 'Id Point',
+            'ID_JABATAN' => 'Id Jabatan',
+            'ID_ABSENSI' => 'Id Absensi',
             'NAMA_PEGAWAI' => 'Nama Pegawai',
-            'TANGGAL_LAHIR' => 'Tanggal Lahir',
+            'NOMOR_TELP' => 'Nomor Telp',
             'ALAMAT' => 'Alamat',
-            'TAHUN_MASUK' => 'Tahun Masuk',
-            'NO_TELP' => 'No Telp',
+            'EMAIL' => 'Email',
+            'GENDER' => 'Gender',
+            'PASSWORD' => 'Password',
         ];
     }
 
@@ -78,17 +83,25 @@ class Pegawai extends \yii\db\ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getDepartemens()
+    public function getJabatans()
     {
-        return $this->hasMany(Departemen::className(), ['ID_PEGAWAI' => 'ID_PEGAWAI']);
+        return $this->hasMany(Jabatan::className(), ['ID_PEGAWAI' => 'ID_PEGAWAI']);
     }
 
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getDEPARTEMEN()
+    public function getJABATAN()
     {
-        return $this->hasOne(Departemen::className(), ['ID_DEPARTEMEN' => 'ID_DEPARTEMEN']);
+        return $this->hasOne(Jabatan::className(), ['ID_JABATAN' => 'ID_JABATAN']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getABSENSI()
+    {
+        return $this->hasOne(Absensi::className(), ['ID_ABSENSI' => 'ID_ABSENSI']);
     }
 
     /**
@@ -97,5 +110,13 @@ class Pegawai extends \yii\db\ActiveRecord
     public function getPOINT()
     {
         return $this->hasOne(Point::className(), ['ID_POINT' => 'ID_POINT']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getPoints()
+    {
+        return $this->hasMany(Point::className(), ['ID_PEGAWAI' => 'ID_PEGAWAI']);
     }
 }
