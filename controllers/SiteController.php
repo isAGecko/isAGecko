@@ -153,4 +153,8 @@ class SiteController extends Controller
             return $this->render('entry', ['model' => $model]);
         }
     }
+    public function actionFormAbsensi()
+    {
+        return $this->render('formAbsensi');
+    }
 }

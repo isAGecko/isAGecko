@@ -40,8 +40,8 @@ AppAsset::register($this);
         'options' => ['class' => 'nav nav-pills navbar-right'],
         'items' => [
             ['label' => 'Home','options'=>['class'=>'nav-link'], 'url' => ['/site/index']],
+            ['label' => 'Absensi','options'=>['class'=>'nav-link'], 'url' => ['/site/form-absensi']],
             ['label' => 'History','options'=>['class'=>'nav-link'], 'url' => ['/pegawai/index']],
-            ['label' => 'Absensi','options'=>['class'=>'nav-link'], 'url' => ['/departemen/index']],
             ['label' => 'History','options'=>['class'=>'nav-link'], 'url' => ['/absensi/index']],
             Yii::$app->user->isGuest ? (
                 ['label' => 'Login', 'url' => ['/site/login']]
