@@ -1,11 +1,11 @@
 <?php
 
-/* @var $this yii\web\View */
+use app\controllers\SiteController;
+use app\models\Absensi;
+use yii\widgets\ActiveForm;
+use yii\helpers\Url;
 use yii\helpers\Html;
-use yii\bootstrap\ActiveForm;
-
 $this->title = 'Absensi Karyawan';
-date_default_timezone_set('Asia/Jakarta');
 ?>
 <style>
         @media only screen and (max-width: 768px) {
@@ -53,97 +53,89 @@ date_default_timezone_set('Asia/Jakarta');
         }.wrap > .container {
             padding: 0px 0px 0px;
         }
-    </style>
+</style>
 <div class="container">
-<div class="row">
-    <div class="col-md-2"></div>
-    <div class="col-md-8">
+    <div class="row">
+        <div class="col-md-2"></div>
+        <div class="col-md-8">
         <button type="button" class="tombol-ambil-gambar" data-toggle="modal" data-target="#myModal" >
             <div class="box-photo" onclick="" style=" background-color: #f5f2f254; width: 100%;  line-height: 300px; border-style: dotted; border-color: darkgrey;">
                 <img src="img/logo.png" id="logo-kadal" alt="" width="10%">
                 <canvas id="canvas" width="380px" height="300px" style="position: relative; display: block; margin: 0 auto;"></canvas>
             </div>
         </button>
-    </div>
-    <div class="col-md-2">
+        <?php
+        $form = ActiveForm::begin([
+            'id' => 'active-form',
+            'options' => [
+                'class' => 'form-group',
+                'enctype' => 'multipart/form-data',
+                'action' => Url::to(['site/form-absensi']),
+            ],
+        ]);
+        /* ADD FORM FIELDS */
+        $listData=['Masuk','Izin'];
+        echo $form->field($model, 'keterangan')->dropDownList(
+            $listData, 
+            ['prompt'=>'Keterangan'],
+            array('class'=>'form-control')
+            );
+        echo $form->field($model, 'detail')->textarea(array('rows'=>5,'cols'=>50));
+        ?>
+        <tr>
+            <td>
+                <input type="text" name="lat" value="<?php echo date('Y-m-d'); ?>" placeholder="" class="form-control">
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <input type="text" name="lat" value="<?php echo date('H:i:s'); ?>" placeholder="" class="form-control">
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <input type="text" name="lat" value="<?php echo Yii::$app->user->identity->username ?>" placeholder="" class="form-control">
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <input type="text" name="lat" value="" placeholder="" id="latitude" class="form-control">
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <input type="text" name="long" value="" placeholder="" id="longitude" class="form-control">
+            </td>
+        </tr>
+        <tr>
+        <br>
+        <?= Html::submitButton('Submit', array('class' => 'btn btn-primary', 'style' => 'width:100%; border-radius:0px;')) ?>
+        </tr>
+        <?php
+        ActiveForm::end();
+        ?>
+        </div>
+        <div class="col-md-2"></div>
     </div>
 </div>
-<div class="row" style="margin-bottom: 10px;">
-    <div class="col-md-2"></div>
-    <div class="col-md-8">
-        <table width="100%">
-        <?= Html::beginForm(['/proses-absensi'], 'post', ['enctype' => 'multipart/form-data']) ?>
-                <tr>
-                    <td>
-                        <select id="select" name="keterangan" class="form-control" style="border-radius: 0px;">
-                            <option value="Masuk" selected>----- Keterangan -----</option>
-                            <option value="Masuk">Masuk</option>
-                            <option value="Izin">Izin</option>
-                        </select>
-                    </td>
-                </tr>
-                <tr></tr>
-                <br>
-                <tr>
-                    <td>
-                        <input type="text" name="lat" value="<?php echo date('Y-m-d'); ?>" placeholder="" class="form-control">
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <input type="text" name="lat" value="<?php echo date('H:i:s'); ?>" placeholder="" class="form-control">
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <input type="text" name="lat" value="<?php echo Yii::$app->user->identity->username ?>" placeholder="" class="form-control">
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <input type="text" name="lat" value="" placeholder="" id="latitude" class="form-control">
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <input type="text" name="long" value="" placeholder="" id="longitude" class="form-control">
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <br>
-                        <textarea id="textarea" name="detail" wrap="VIRTUAL" class="form-control" cols="50" rows="5" placeholder="Masukkan keterangan kenapa Anda tidak Masuk Kerja: cth: sakit, kunjungan kerja dll"></textarea>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <br>
-                        <?= Html::submitButton('Submit', array('class' => 'btn btn-primary', 'style' => 'width:100%; border-radius:0px;')) ?>
-                    </td>
-                </tr>
-                <?= Html::endForm() ?>
-        </table>
-    </div>
-    <div class="col-md-2"></div>
-</div>
+<!-- modal dialog -->
 <div class="modal fade" id="myModal">
-        <div class="modal-dialog">
-            <div class="modal-content">
-            <!-- Modal Header -->
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
-            </div>
-            <!-- Modal body -->
-            <div class="modal-body">
-                <video autoplay="true" id="video-webcam" width="100%"></video>
-            </div>
-            <!-- Modal footer -->
-            <div class="modal-footer">
-                <button type="button" class="btn btn-primary" data-dismiss="modal" id="capture" style="display: block; margin-right: auto; margin-left: auto">Ambil!</button>
-            </div>
+    <div class="modal-dialog">
+        <div class="modal-content">
+        <!-- Modal Header -->
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+        <!-- Modal body -->
+        <div class="modal-body">
+            <video autoplay="true" id="video-webcam" width="100%"></video>
+        </div>
+        <!-- Modal footer -->
+        <div class="modal-footer">
+            <button type="button" class="btn btn-primary" data-dismiss="modal" id="capture" style="display: block; margin-right: auto; margin-left: auto">Ambil!</button>
+        </div>
         </div>
     </div>
-</div>
 </div>
 <script type="text/javascript">
     var kanvas=$('#canvas');
@@ -189,15 +181,15 @@ date_default_timezone_set('Asia/Jakarta');
             document.getElementById("longitude").value = position.coords.longitude;
 
         }
-        $('#textarea').hide();
-    $('#select').change(function() {
-    var textarea = $('textarea');
-    var select = $('#select').val();
+        $('#absensi-detail').hide();
+    $('#absensi-keterangan').change(function() {
+    var textarea = $('#absensi-detail');
+    var select = $('#absensi-keterangan').val();
     console.log(select);
-        if (select == 'Izin') {
+        if (select == 1) {
             textarea.show();
         }
-        if (select == 'Masuk') {
+        if (select == 0) {
             textarea.hide();
         }
     });

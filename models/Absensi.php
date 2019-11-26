@@ -33,7 +33,7 @@ class Absensi extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['id_pegawai', 'tanggal', 'jam', 'terlambat', 'keterangan', 'detail', 'foto', 'point'], 'required'],
+            [['id_pegawai', 'tanggal', 'jam', 'terlambat', 'keterangan', 'foto', 'point'], 'required'],
             [['tanggal', 'jam', 'terlambat'], 'safe'],
             [['point'], 'integer'],
             [['id_pegawai'], 'string', 'max' => 20],
@@ -53,8 +53,8 @@ class Absensi extends \yii\db\ActiveRecord
             'tanggal' => 'Tanggal',
             'jam' => 'Jam',
             'terlambat' => 'Terlambat',
-            'keterangan' => 'Keterangan',
-            'detail' => 'Detail',
+            'keterangan' => '',
+            'detail' => '',
             'foto' => 'Foto',
             'point' => 'Point',
         ];

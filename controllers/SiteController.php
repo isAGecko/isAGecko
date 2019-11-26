@@ -161,6 +161,6 @@ class SiteController extends Controller
             echo "Sukses";
             die();
         }
-        return $this->render('form-contoh');
+        return $this->render('form-absensi', ['model' => $model]);
     }
 }
