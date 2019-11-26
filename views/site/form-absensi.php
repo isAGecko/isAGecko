@@ -6,6 +6,7 @@ use yii\widgets\ActiveForm;
 use yii\helpers\Url;
 use yii\helpers\Html;
 $this->title = 'Absensi Karyawan';
+date_default_timezone_set('Asia/Jakarta');
 ?>
 <style>
         @media only screen and (max-width: 768px) {
