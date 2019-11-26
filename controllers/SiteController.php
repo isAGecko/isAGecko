@@ -158,8 +158,7 @@ class SiteController extends Controller
     {
         $model=new Absensi();
         if($model->load(Yii::$app->request->post()) && $model->validate()) {
-            echo "Sukses";
-            die();
+            $model->save();
         }
         return $this->render('form-absensi', ['model' => $model]);
     }

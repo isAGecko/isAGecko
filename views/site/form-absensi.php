@@ -85,12 +85,12 @@ date_default_timezone_set('Asia/Jakarta');
         ?>
         <tr>
             <td>
-                <input type="text" name="lat" value="<?php echo date('Y-m-d'); ?>" placeholder="" class="form-control">
+                <?php echo $form->hiddenField($model,'id_pegawai',array('value'=>Yii::$app->user->identity->username)); ?>
             </td>
         </tr>
         <tr>
             <td>
-                <input type="text" name="lat" value="<?php echo date('H:i:s'); ?>" placeholder="" class="form-control">
+            <?php echo $form->hiddenField($model,'jam',array('value'=>Yii::$app->user->identity->username)); ?>
             </td>
         </tr>
         <tr>
