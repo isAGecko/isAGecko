@@ -2,6 +2,7 @@
 
 namespace app\controllers;
 
+use app\models\Absensi;
 use Yii;
 use yii\filters\AccessControl;
 use yii\web\Controller;
@@ -155,6 +156,11 @@ class SiteController extends Controller
     }
     public function actionFormAbsensi()
     {
-        return $this->render('formAbsensi');
+        $model=new Absensi();
+        if($model->load(Yii::$app->request->post()) && $model->validate()) {
+            echo "Sukses";
+            die();
+        }
+        return $this->render('form-contoh');
     }
 }
