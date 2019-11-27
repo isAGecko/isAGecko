@@ -157,8 +157,28 @@ class SiteController extends Controller
     public function actionFormAbsensi()
     {
         $model=new Absensi();
-        if($model->load(Yii::$app->request->post()) && $model->validate()) {
-            $model->save();
+        if($model->load(Yii::$app->request->post(), '')){
+            $nama_pegawai = Yii::$app->request->post('nama_pegawai');
+            $detail = Yii::$app->request->post('detail');
+            $keterangan=$_POST['Absensi']['keterangan'];
+            $jam = Yii::$app->request->post('jam');
+            $tanggal = Yii::$app->request->post('tanggal');
+            $latitude = Yii::$app->request->post('lat');
+            $longitude = Yii::$app->request->post('long');
+            $point=100;
+            $terlambat='00:00:00';
+            $foto='jaya.jpg';
+            $model->id_pegawai=$nama_pegawai;
+            $model->tanggal=$tanggal;
+            $model->jam=$jam;
+            $model->terlambat=$terlambat;
+            $model->keterangan=$keterangan;
+            $model->detail=$detail;
+            $model->foto=$foto;
+            $model->point=$point;
+            var_dump($model->save());
+
+            die();
         }
         return $this->render('form-absensi', ['model' => $model]);
     }

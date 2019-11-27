@@ -67,45 +67,45 @@ date_default_timezone_set('Asia/Jakarta');
         </button>
         <?php
         $form = ActiveForm::begin([
-            'id' => 'active-form',
-            'options' => [
-                'class' => 'form-group',
-                'enctype' => 'multipart/form-data',
-                'action' => Url::to(['site/form-absensi']),
-            ],
+            'method' => 'post',
+            'action' => Url::to(['site/form-absensi']),
         ]);
         /* ADD FORM FIELDS */
         $listData=['Masuk','Izin'];
         echo $form->field($model, 'keterangan')->dropDownList(
             $listData, 
-            ['prompt'=>'Keterangan'],
+            ['prompt'=>'Keterangan','id'=>'keterangan'],
             array('class'=>'form-control')
             );
-        echo $form->field($model, 'detail')->textarea(array('rows'=>5,'cols'=>50));
         ?>
         <tr>
             <td>
-                <?php echo $form->hiddenField($model,'id_pegawai',array('value'=>Yii::$app->user->identity->username)); ?>
+                <?= Html::textArea('detail',"",['id'=>'detail','rows'=>5,'cols'=>50,'class'=>'form-control']) ?>
             </td>
         </tr>
         <tr>
             <td>
-            <?php echo $form->hiddenField($model,'jam',array('value'=>Yii::$app->user->identity->username)); ?>
+                <?= Html::textInput('nama_pegawai', Yii::$app->user->identity->username, ['class' => 'form-control']) ?>
             </td>
         </tr>
         <tr>
             <td>
-                <input type="text" name="lat" value="<?php echo Yii::$app->user->identity->username ?>" placeholder="" class="form-control">
+                <?= Html::textInput('jam',date('H:i:s') , ['class' => 'form-control']) ?>
             </td>
         </tr>
         <tr>
             <td>
-                <input type="text" name="lat" value="" placeholder="" id="latitude" class="form-control">
+                <?= Html::textInput('tanggal',date('Y-m-d') , ['class' => 'form-control']) ?>
             </td>
         </tr>
         <tr>
             <td>
-                <input type="text" name="long" value="" placeholder="" id="longitude" class="form-control">
+                <?= Html::textInput('lat','value' , ['class' => 'form-control','id'=>'latitude']) ?>
+            </td>
+        </tr>
+        <tr>
+            <td>
+            <?= Html::textInput('long','value', ['class' => 'form-control','id'=>'longitude']) ?>
             </td>
         </tr>
         <tr>
@@ -182,10 +182,10 @@ date_default_timezone_set('Asia/Jakarta');
             document.getElementById("longitude").value = position.coords.longitude;
 
         }
-        $('#absensi-detail').hide();
-    $('#absensi-keterangan').change(function() {
-    var textarea = $('#absensi-detail');
-    var select = $('#absensi-keterangan').val();
+        $('#detail').hide();
+    $('#keterangan').change(function() {
+    var textarea = $('#detail');
+    var select = $('#keterangan').val();
     console.log(select);
         if (select == 1) {
             textarea.show();

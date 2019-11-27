@@ -33,7 +33,7 @@ class Absensi extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['id_pegawai', 'tanggal', 'jam', 'terlambat', 'keterangan', 'foto', 'point'], 'required'],
+            [[ 'tanggal', 'jam', 'terlambat', 'keterangan', 'foto', 'point'], 'required'],
             [['tanggal', 'jam', 'terlambat'], 'safe'],
             [['point'], 'integer'],
             [['id_pegawai'], 'string', 'max' => 20],
