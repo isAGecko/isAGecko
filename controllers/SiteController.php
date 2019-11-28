@@ -84,7 +84,7 @@ class SiteController extends Controller
             ->limit(1)
             ->orderBy('id_absensi DESC')
             ->all();
-        return $this->render('index');
+        return $this->render('index',compact('rows'));
     }
 
     /**

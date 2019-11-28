@@ -55,7 +55,8 @@ $this->title = 'Absensi Karyawan';
 
 
     </style>
-
+<?php
+?>
 <div class="row" style="height:80vh">
     <div class="col-md-8 text-center" style="background-color:#245AA7; height:100%">
         <img src="img/home.png" alt="home" width="75%" style="margin-top:2vh">
@@ -64,16 +65,15 @@ $this->title = 'Absensi Karyawan';
         <br>Anda hanya perlu mengambil gambar 
         <br>terbaru Anda dan menekan tombol absen</p>
     </div>
-
     <div class="col-md-4">
         <div class="card" style="background-color: whitesmoke;width: 25rem;border-radius: 8px;padding: 12px; 
         box-shadow: 8px 9px 6px 0px #dad9; margin:auto;margin-top:30%">
-            <img class="card-img-top" src="img/foto1.jpg" alt="Card image cap" width="100%">
+            <img class="card-img-top" src="img/<?php echo $rows[0]['foto'] ?>" alt="Card image cap" width="100%">
             <div class="card-body">
-                <h5 class="card-title">Card title</h5>
-                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                <a href="#" class="btn btn-primary">Go somewhere</a>
+                <h5 class="card-title"><?php echo"Tanggal: ". $rows[0]['tanggal']; ?></h5>
+                <p class="card-text">Anda Absen pada jam: <?php echo $rows[0]['jam'] ?> dan Anda mendapatkan Point: <?php echo $rows[0]['point']; ?> .</p>
+                <a href="#" class="btn btn-primary">Detail!</a>
             </div>
         </div>
-    </div>
+    </div>  
 </div>
