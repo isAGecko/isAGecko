@@ -19,21 +19,6 @@ date_default_timezone_set('Asia/Jakarta');
         }[class*="box-photo"] #canvas{
             width: 100%;
         }
-        }.fontku{
-            font-family: 'google_font';
-        }
-        .nav-pills > li.active > a, .nav-pills > li.active > a:hover, .nav-pills > li.active > a:focus {
-            color: #fff;
-            background-color: #00a2e9;
-            border-radius: 0px;
-        
-        }.nav-pills > li > a {
-            border-radius: 0px; 
-
-        }.nav-pills{
-            margin-top: 5px;
-        }.navbar-toggle{
-            background-color: #00a2e9;
         }
         .tombol-ambil-gambar{
             background: none;

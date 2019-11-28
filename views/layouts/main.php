@@ -25,6 +25,24 @@ AppAsset::register($this);
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootbox.js/5.3.3/bootbox.min.js"></script>
     <?php $this->head() ?>
+    <style>
+        .fontku{
+            font-family: 'google_font';
+        }
+        .nav-pills > li.active > a, .nav-pills > li.active > a:hover, .nav-pills > li.active > a:focus {
+            color: #fff;
+            background-color: #00a2e9;
+            border-radius: 0px;
+        
+        }.nav-pills > li > a {
+            border-radius: 0px; 
+
+        }.nav-pills{
+            margin-top: 5px;
+        }.navbar-toggle{
+            background-color: #00a2e9;
+        }
+    </style>
 
 </head>
 <body>
@@ -43,7 +61,7 @@ AppAsset::register($this);
         'items' => [
             ['label' => 'Home','options'=>['class'=>'nav-link'], 'url' => ['/site/index']],
             ['label' => 'Absensi','options'=>['class'=>'nav-link'], 'url' => ['/site/form-absensi']],
-            ['label' => 'History','options'=>['class'=>'nav-link'], 'url' => ['/pegawai/index']],
+            ['label' => 'Dashboard','options'=>['class'=>'nav-link'], 'url' => ['/dashboard/index']],
             ['label' => 'History','options'=>['class'=>'nav-link'], 'url' => ['/absensi/index']],
             Yii::$app->user->isGuest ? (
                 ['label' => 'Login', 'url' => ['/site/login']]

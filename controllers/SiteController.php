@@ -76,6 +76,14 @@ class SiteController extends Controller
             'model' => $model,
         ]);
         }
+        $user=Yii::$app->user->identity->username;
+        $rows = (new \yii\db\Query())
+            ->select(['*'])
+            ->from('absensi')
+            ->where(['id_pegawai' => $user])
+            ->limit(1)
+            ->orderBy('id_absensi DESC')
+            ->all();
         return $this->render('index');
     }
 
