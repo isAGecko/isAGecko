@@ -52,138 +52,28 @@ $this->title = 'Absensi Karyawan';
         }.wrap > .container {
             padding: 0px 0px 0px;
         }
+
+
     </style>
-<div class="container">
-<div class="row">
-    <div class="col-md-2"></div>
-    <div class="col-md-8">
-        <button type="button" class="tombol-ambil-gambar" data-toggle="modal" data-target="#myModal" >
-            <div class="box-photo" onclick="" style=" background-color: #f5f2f254; width: 100%;  line-height: 300px; border-style: dotted; border-color: darkgrey;">
-                <img src="img/logo.png" id="logo-kadal" alt="" width="10%">
-                <canvas id="canvas" width="380px" height="300px" style="position: relative; display: block; margin: 0 auto;"></canvas>
-            </div>
-        </button>
-    </div>
-    <div class="col-md-2">
-    </div>
-</div>
-<div class="row" style="margin-bottom: 10px;">
-    <div class="col-md-2"></div>
-    <div class="col-md-8">
-        <table width="100%">
-        <?= Html::beginForm(['/proses-absensi'], 'post', ['enctype' => 'multipart/form-data']) ?>
-                <tr>
-                    <td>
-                        <select id="select" name="keterangan" class="form-control" style="border-radius: 0px;">
-                            <option value="Masuk" selected>----- Keterangan -----</option>
-                            <option value="Masuk">Masuk</option>
-                            <option value="Izin">Izin</option>
-                        </select>
-                    </td>
-                </tr>
-                <tr></tr>
-                <br>
-                <tr>
-                    <td>
-                        <input type="hidden" name="lat" value="" placeholder="" id="latitude" class="form-control">
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <input type="hidden" name="long" value="" placeholder="" id="longitude" class="form-control">
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <br>
-                        <textarea id="textarea" name="detail" wrap="VIRTUAL" class="form-control" cols="50" rows="5" placeholder="Masukkan keterangan kenapa Anda tidak Masuk Kerja: cth: sakit, kunjungan kerja dll"></textarea>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <br>
-                        <?= Html::submitButton('Submit', array('class' => 'btn btn-primary', 'style' => 'width:100%; border-radius:0px;')) ?>
-                    </td>
-                </tr>
-                <?= Html::endForm() ?>
-        </table>
-    </div>
-    <div class="col-md-2"></div>
-</div>
-<div class="modal fade" id="myModal">
-        <div class="modal-dialog">
-            <div class="modal-content">
-            <!-- Modal Header -->
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
-            </div>
-            <!-- Modal body -->
-            <div class="modal-body">
-                <video autoplay="true" id="video-webcam" width="100%"></video>
-            </div>
-            <!-- Modal footer -->
-            <div class="modal-footer">
-                <button type="button" class="btn btn-primary" data-dismiss="modal" id="capture" style="display: block; margin-right: auto; margin-left: auto">Ambil!</button>
+
+<div class="row" style="height:80vh">
+        <div class="col-md-8 text-center" style="background-color:#245AA7; height:100%">
+            <img src="img/home.png" alt="home" width="75%" style="margin-top:2vh">
+            <h3 style="color:white">Selamat Datang</h3>
+            <p style="color:white">Sistem informasi absensi online dengan GPS,
+            <br>Anda hanya perlu mengambil gambar 
+            <br>terbaru Anda dan menekan tombol absen</p>
+        </div>
+
+        <div class="col-md-4" style="display: flex">
+            <div class="card" style="background-color: whitesmoke;width: 25rem;border-radius: 8px;padding: 12px; 
+            box-shadow: 8px 9px 6px 0px #dad9; margin:auto;margin-top:30%">
+                <img class="card-img-top" src="img/foto1.jpg" alt="Card image cap" width="100%">
+                <div class="card-body">
+                    <h5 class="card-title">Card title</h5>
+                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                    <a href="#" class="btn btn-primary">Go somewhere</a>
+                </div>
             </div>
         </div>
-    </div>
 </div>
-</div>
-<script type="text/javascript">
-    var kanvas=$('#canvas');
-    kanvas.hide();
-    // seleksi elemen video
-    var video = document.querySelector("#video-webcam");
-    // minta izin user
-    navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia || navigator.msGetUserMedia || navigator.oGetUserMedia;
-    // jika user memberikan izin
-    if (navigator.getUserMedia) {
-        // jalankan fungsi handleVideo, dan videoError jika izin ditolak
-        navigator.getUserMedia({ video: true }, handleVideo, videoError);
-    }
-    // fungsi ini akan dieksekusi jika  izin telah diberikan
-    function handleVideo(stream) {
-        video.srcObject = stream;
-    }
-    // fungsi ini akan dieksekusi kalau user menolak izin
-    function videoError(e) {
-        // do something
-        alert("Izinkan menggunakan webcam untuk demo!")
-    }
-    // Draw image
-    var context = canvas.getContext('2d');
-    capture.addEventListener("click", function() {
-        var logo=$('#logo-kadal');
-        var ambil=$('#ambil-gambar');
-        var kanvas=$('#canvas');
-        logo.hide();
-        ambil.hide();
-        kanvas.show();
-        $('.box-photo').css({'line-height': '100%'});
-        context.drawImage(video, 0, 0, 380, 300);
-    });
-    $(document).ready(function() {
-        if (navigator.geolocation) {
-            navigator.geolocation.getCurrentPosition(showPosition);
-        } else {
-            alert("Geolocation is not supported by this browser.");
-        }
-        function showPosition(position) {
-            document.getElementById("latitude").value = position.coords.latitude;
-            document.getElementById("longitude").value = position.coords.longitude;
-
-        }
-        $('#textarea').hide();
-    $('#select').change(function() {
-    var textarea = $('textarea');
-    var select = $('#select').val();
-    console.log(select);
-        if (select == 'Izin') {
-            textarea.show();
-        }
-        if (select == 'Masuk') {
-            textarea.hide();
-        }
-    });
-    });
-</script>
