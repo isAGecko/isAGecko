@@ -12,7 +12,7 @@ use app\models\LoginForm;
 use app\models\ContactForm;
 use app\models\EntryForm;
 use Carbon\Carbon;
-
+use yii\db\Command;
 
 class SiteController extends Controller
 {
@@ -189,7 +189,6 @@ class SiteController extends Controller
             $dist = rad2deg($dist);
             $miles = $dist * 60 * 1.1515;
             $unit = strtoupper($unit);
-
             if ($unit == "K") {
                 return ($miles * 1.609344);
             } else if ($unit == "N") {
@@ -204,13 +203,20 @@ class SiteController extends Controller
             //sampai sini pengaturan jaraknya gan
             $point=100;
             $foto='jaya.jpg';
+            $hariini=date('Y-m-d');
+            $rows = Yii::$app->db->createCommand("SELECT id_pegawai,tanggal FROM absensi WHERE id_pegawai='$nama_pegawai' && tanggal='$hariini'")
+            ->queryAll();
             if($dt->isWednesday()){
                 Yii::$app->session->setFlash('Gagal','Hari Libur ini Bang');
                 return $this->render('form-absensi', ['model' => $model]);
             }else if($jarak>100){
                 Yii::$app->session->setFlash('Gagal','Kejauhan lah Bang');
                 return $this->render('form-absensi', ['model' => $model]);
-            }else{
+            }else if($rows>0){
+                Yii::$app->session->setFlash('Gagal','Udah Absen Lohh');
+                return $this->render('form-absensi', ['model' => $model]);
+            }
+            else{
                 $model->id_pegawai=$nama_pegawai;
                 $model->tanggal=$tanggal;
                 $model->jam=$jam;
@@ -220,6 +226,8 @@ class SiteController extends Controller
                 $model->foto=$foto;
                 $model->point=$point;
                 $model->save();
+                Yii::$app->session->setFlash('Sukses','Anda Sukses Absen Hari ini');
+                return $this->render('form-absensi', ['model' => $model]);
             }
         }
         return $this->render('form-absensi', ['model' => $model]);
