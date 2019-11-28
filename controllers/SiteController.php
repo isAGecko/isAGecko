@@ -200,7 +200,7 @@ class SiteController extends Controller
             }
             //yang kedua adalah kantor
             $terlambat= $diff->h.":".$diff->i.":".$diff->s;
-            $jarak=distance($latitude, $longitude, -7.121584, 112.402677, "K")*1000;
+            $jarak=distance($latitude, $longitude, -7.115347, 112.427740, "K")*1000;
             //sampai sini pengaturan jaraknya gan
             $point=100;
             $foto='jaya.jpg';
