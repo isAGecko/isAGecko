@@ -11,6 +11,7 @@ use yii\filters\VerbFilter;
 use app\models\LoginForm;
 use app\models\ContactForm;
 use app\models\EntryForm;
+use Carbon\Carbon;
 
 
 class SiteController extends Controller
@@ -156,8 +157,15 @@ class SiteController extends Controller
     }
     public function actionFormAbsensi()
     {
+        //pengaturan waktu dan tanggal
+        date_default_timezone_set('Asia/Jakarta');
+        $dt = Carbon::now();
         $model=new Absensi();
         if($model->load(Yii::$app->request->post(), '')){
+            $date2=date_create("19:00:00");
+            $date1=date_create(date('H:i:s'));
+            $diff=date_diff($date2,$date1);
+            //sampai sini ya pengaturan waktunya
             $nama_pegawai = Yii::$app->request->post('nama_pegawai');
             $detail = Yii::$app->request->post('detail');
             $keterangan=$_POST['Absensi']['keterangan'];
@@ -165,20 +173,45 @@ class SiteController extends Controller
             $tanggal = Yii::$app->request->post('tanggal');
             $latitude = Yii::$app->request->post('lat');
             $longitude = Yii::$app->request->post('long');
-            $point=100;
-            $terlambat='00:00:00';
-            $foto='jaya.jpg';
-            $model->id_pegawai=$nama_pegawai;
-            $model->tanggal=$tanggal;
-            $model->jam=$jam;
-            $model->terlambat=$terlambat;
-            $model->keterangan=$keterangan;
-            $model->detail=$detail;
-            $model->foto=$foto;
-            $model->point=$point;
-            var_dump($model->save());
+            //pengaturan jarak dengan rumus lat long
+            function distance($lat1, $lon1, $lat2, $lon2, $unit) {
+            $theta = $lon1 - $lon2;
+            $dist = sin(deg2rad($lat1))  *sin(deg2rad($lat2)) +  cos(deg2rad($lat1))  *cos(deg2rad($lat2)) * cos(deg2rad($theta));
+            $dist = acos($dist);
+            $dist = rad2deg($dist);
+            $miles = $dist * 60 * 1.1515;
+            $unit = strtoupper($unit);
 
-            die();
+            if ($unit == "K") {
+                return ($miles * 1.609344);
+            } else if ($unit == "N") {
+                return ($miles * 0.8684);
+            } else {
+                    return $miles;
+                }
+            }
+            //yang kedua adalah kantor
+            $terlambat= $diff->h.":".$diff->i.":".$diff->s;
+            $jarak=distance($latitude, $longitude, -7.045317, 112.430634, "K")*1000;
+            //sampai sini pengaturan jaraknya gan
+            $point=100;
+            $foto='jaya.jpg';
+            if($dt->isThursday()){
+                Yii::$app->session->setFlash('Gagal','Hari Libur ini Bang');
+                return $this->render('form-absensi', ['model' => $model]);
+            }else if($jarak>100){
+                Yii::$app->session->setFlash('Gagal','Hari Libur ini Bang');
+                return $this->render('form-absensi', ['model' => $model]);
+            }else{
+                $model->id_pegawai=$nama_pegawai;
+                $model->tanggal=$tanggal;
+                $model->jam=$jam;
+                $model->terlambat=$terlambat;
+                $model->keterangan=$keterangan;
+                $model->detail=$detail;
+                $model->foto=$foto;
+                $model->point=$point;
+            }
         }
         return $this->render('form-absensi', ['model' => $model]);
     }

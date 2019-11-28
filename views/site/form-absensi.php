@@ -59,6 +59,10 @@ date_default_timezone_set('Asia/Jakarta');
     <div class="row">
         <div class="col-md-2"></div>
         <div class="col-md-8">
+            <?php
+                if(Yii::$app->session->hasFlash('Gagal')){
+                }
+            ?>
         <button type="button" class="tombol-ambil-gambar" data-toggle="modal" data-target="#myModal" >
             <div class="box-photo" onclick="" style=" background-color: #f5f2f254; width: 100%;  line-height: 300px; border-style: dotted; border-color: darkgrey;">
                 <img src="img/logo.png" id="logo-kadal" alt="" width="10%">
