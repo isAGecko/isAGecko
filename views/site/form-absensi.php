@@ -61,6 +61,7 @@ date_default_timezone_set('Asia/Jakarta');
         <div class="col-md-8">
             <?php
                 if(Yii::$app->session->hasFlash('Gagal')){
+                    echo "<div class='alert alert-danger'>". Yii::$app->session->getFlash('Gagal')."</div>";
                 }
             ?>
         <button type="button" class="tombol-ambil-gambar" data-toggle="modal" data-target="#myModal" >

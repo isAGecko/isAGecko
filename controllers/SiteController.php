@@ -192,15 +192,15 @@ class SiteController extends Controller
             }
             //yang kedua adalah kantor
             $terlambat= $diff->h.":".$diff->i.":".$diff->s;
-            $jarak=distance($latitude, $longitude, -7.045317, 112.430634, "K")*1000;
+            $jarak=distance($latitude, $longitude, -7.121584, 112.402677, "K")*1000;
             //sampai sini pengaturan jaraknya gan
             $point=100;
             $foto='jaya.jpg';
-            if($dt->isThursday()){
+            if($dt->isWednesday()){
                 Yii::$app->session->setFlash('Gagal','Hari Libur ini Bang');
                 return $this->render('form-absensi', ['model' => $model]);
             }else if($jarak>100){
-                Yii::$app->session->setFlash('Gagal','Hari Libur ini Bang');
+                Yii::$app->session->setFlash('Gagal','Kejauhan lah Bang');
                 return $this->render('form-absensi', ['model' => $model]);
             }else{
                 $model->id_pegawai=$nama_pegawai;
@@ -211,6 +211,7 @@ class SiteController extends Controller
                 $model->detail=$detail;
                 $model->foto=$foto;
                 $model->point=$point;
+                $model->save();
             }
         }
         return $this->render('form-absensi', ['model' => $model]);
