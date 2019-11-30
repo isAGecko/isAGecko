@@ -11,6 +11,7 @@ use yii\filters\VerbFilter;
 use app\models\LoginForm;
 use app\models\ContactForm;
 use app\models\EntryForm;
+use app\models\Point;
 use Carbon\Carbon;
 use yii\db\Command;
 
@@ -148,21 +149,6 @@ class SiteController extends Controller
     {
         return $this->render('about');
     }
-    public function actionEntry()
-    {
-        $model = new EntryForm();
-
-        if ($model->load(Yii::$app->request->post()) && $model->validate()) {
-            // data yang valid diperoleh pada $model
-
-            // lakukan sesuatu terhadap $model di sini ...
-
-            return $this->render('entry-confirm', ['model' => $model]);
-        } else {
-            // menampilkan form pada halaman, ada atau tidaknya kegagalan validasi tidak masalah
-            return $this->render('entry', ['model' => $model]);
-        }
-    }
     public function actionFormAbsensi()
     {
         //pengaturan waktu dan tanggal
@@ -170,7 +156,7 @@ class SiteController extends Controller
         $dt = Carbon::now();
         $model=new Absensi();
         if($model->load(Yii::$app->request->post(), '')){
-            $date2=date_create("19:00:00");
+            $date2=date_create("08:00:00");
             $date1=date_create(date('H:i:s'));
             $diff=date_diff($date2,$date1);
             //sampai sini ya pengaturan waktunya
@@ -197,11 +183,40 @@ class SiteController extends Controller
                     return $miles;
                 }
             }
+            $point=0;
             //yang kedua adalah kantor
             $terlambat= $diff->h.":".$diff->i.":".$diff->s;
-            $jarak=distance($latitude, $longitude, -7.115347, 112.427740, "K")*1000;
+            $jarak=distance($latitude, $longitude, -7.052258, 112.425960, "K")*1000;
             //sampai sini pengaturan jaraknya gan
-            $point=100;
+            if($diff->h>=2){
+                $point=50;
+            }elseif($diff->h>=1){
+                $point=75;
+            }elseif($diff->h<1){
+                $point=100;
+            }
+            $points=new Point();
+            $cekPoint = Yii::$app->db->createCommand("SELECT id_pegawai,total_point FROM point WHERE id_pegawai='$nama_pegawai'")
+            ->queryAll();
+            if(!empty($cekPoint[0]['total_point'])){
+                $point_sekarang=$cekPoint[0]['total_point'];
+                $total_point=$point_sekarang+$point;
+            }else{
+                $point_sekarang=0;
+                $total_point=$point_sekarang+$point;
+            }
+            if(!empty($cekPoint)){
+                $insertPoint = Yii::$app->db->createCommand()
+                ->update('point', ['total_point' => $total_point], ['id_pegawai'=>$nama_pegawai])
+                ->execute();
+            }else{
+                $points->id_pegawai=$nama_pegawai;
+                $points->total_point=$point;
+                $points->save();
+            }            
+            $points->id_pegawai=$nama_pegawai;
+            $points->total_point=$point;
+            $points->save();
             $foto='jaya.jpg';
             $hariini=date('Y-m-d');
             $rows = Yii::$app->db->createCommand("SELECT id_pegawai,tanggal FROM absensi WHERE id_pegawai='$nama_pegawai' && tanggal='$hariini'")
@@ -212,7 +227,7 @@ class SiteController extends Controller
             }else if($jarak>100){
                 Yii::$app->session->setFlash('Gagal','Kejauhan lah Bang');
                 return $this->render('form-absensi', ['model' => $model]);
-            }else if($rows>0){
+            }else if(!empty($rows)){
                 Yii::$app->session->setFlash('Gagal','Udah Absen Lohh');
                 return $this->render('form-absensi', ['model' => $model]);
             }
@@ -231,5 +246,22 @@ class SiteController extends Controller
             }
         }
         return $this->render('form-absensi', ['model' => $model]);
+    }
+    public function actionHistory(){
+        if (Yii::$app->user->isGuest) {
+            $model = new LoginForm();
+        if ($model->load(Yii::$app->request->post()) && $model->login()) {
+            return $this->goBack();
+        }
+
+        $model->password = '';
+        return $this->render('login', [
+            'model' => $model,
+        ]);
+        }
+        $nama_pegawai=Yii::$app->user->identity->username;
+        $dataAbsensi = Yii::$app->db->createCommand("SELECT * FROM absensi WHERE id_pegawai='$nama_pegawai'")
+            ->queryAll();
+        return $this->render('history',['dataAbsensi'=>$dataAbsensi]);
     }
 }
