@@ -41,6 +41,8 @@ AppAsset::register($this);
             margin-top: 5px;
         }.navbar-toggle{
             background-color: #00a2e9;
+        }.wrap > .container {
+            padding: 0px 0px 0px;
         }
     </style>
 
@@ -63,6 +65,7 @@ AppAsset::register($this);
             ['label' => 'Absensi','options'=>['class'=>'nav-link'], 'url' => ['/site/form-absensi']],
             ['label' => 'Dashboard','options'=>['class'=>'nav-link'], 'url' => ['/dashboard/index']],
             ['label' => 'History','options'=>['class'=>'nav-link'], 'url' => ['/site/history']],
+            ['label' => 'Sign Up','options'=>['class'=>'nav-link'], 'url' => ['/site/signup']],
             Yii::$app->user->isGuest ? (
                 ['label' => 'Login', 'url' => ['/site/login']]
             ) : (

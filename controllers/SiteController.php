@@ -12,8 +12,10 @@ use app\models\LoginForm;
 use app\models\ContactForm;
 use app\models\EntryForm;
 use app\models\Point;
+use app\models\SignupForm;
 use Carbon\Carbon;
 use yii\db\Command;
+
 
 class SiteController extends Controller
 {
@@ -109,6 +111,20 @@ class SiteController extends Controller
             'model' => $model,
         ]);
     }
+    public function actionSignup() {
+        $model = new SignupForm();
+        if ($model->load(Yii::$app->request->post())) {
+            if ($user = $model->signup()) {
+                if (Yii::$app->getUser()->login($user)) {
+                    return $this->goHome();
+                }
+            }
+        }
+
+        return $this->render('signup', [
+                    'model' => $model,
+        ]);
+    }
 
     /**
      * Logout action.
@@ -127,18 +143,7 @@ class SiteController extends Controller
      *
      * @return Response|string
      */
-    public function actionContact()
-    {
-        $model = new ContactForm();
-        if ($model->load(Yii::$app->request->post()) && $model->contact(Yii::$app->params['adminEmail'])) {
-            Yii::$app->session->setFlash('contactFormSubmitted');
-
-            return $this->refresh();
-        }
-        return $this->render('contact', [
-            'model' => $model,
-        ]);
-    }
+    
 
     /**
      * Displays about page.
@@ -186,7 +191,7 @@ class SiteController extends Controller
             $point=0;
             //yang kedua adalah kantor
             $terlambat= $diff->h.":".$diff->i.":".$diff->s;
-            $jarak=distance($latitude, $longitude, -7.052258, 112.425960, "K")*1000;
+            $jarak=distance($latitude, $longitude, -7.150996, 110.140281, "K")*1000;
             //sampai sini pengaturan jaraknya gan
             if($diff->h>=2){
                 $point=50;
