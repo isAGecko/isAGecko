@@ -237,13 +237,16 @@ class SiteController extends Controller
                 return $this->render('form-absensi', ['model' => $model]);
             }
             else{
+                $output_file="img/foto_absen/".$nama_pegawai.$tanggal.".png";
+                $base64_string=Yii::$app->request->post('canvasImg');
+                file_put_contents($output_file, file_get_contents($base64_string));
                 $model->id_pegawai=$nama_pegawai;
                 $model->tanggal=$tanggal;
                 $model->jam=$jam;
                 $model->terlambat=$terlambat;
                 $model->keterangan=$keterangan;
                 $model->detail=$detail;
-                $model->foto=$foto;
+                $model->foto=$nama_pegawai.$tanggal.".png";
                 $model->point=$point;
                 $model->save();
                 Yii::$app->session->setFlash('Sukses','Anda Sukses Absen Hari ini');
