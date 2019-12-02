@@ -67,11 +67,11 @@ if(empty($rows)){
 
     @media only screen and (max-width: 480px){
         .tinggi{
-            height:50vh;
+            height:45vh;
         }
 
         .tinggi1{
-            height:20vh;
+            height:15vh;
         }
 
         .cards {
@@ -96,6 +96,15 @@ if(empty($rows)){
             border-color:#c2c2c2;
             border-width: medium;
         }
+
+        .imgHome{
+            width:75%;
+            padding-top:2vh;
+        }
+
+        .imgFoto{
+            width:50%;
+        }
     }
 
     @media (min-width: 481px) and (max-width: 769px){
@@ -104,7 +113,7 @@ if(empty($rows)){
         }
 
         .tinggi1{
-            height:15vh;
+            height:10vh;
         }
 
         .cards {
@@ -129,7 +138,17 @@ if(empty($rows)){
             border-color:#c2c2c2;
             border-width: medium;
         }
+
+        .imgHome{
+            width:75%;
+            padding-top:2vh;
+        }
+
+        .imgFoto{
+            width:50%;
+        }
     }
+
 
     @media only screen and (min-width: 769px){
         .tinggi{    
@@ -160,17 +179,28 @@ if(empty($rows)){
             border-width: medium;
         }
 
+        .imgHome{
+            width:85%;
+            padding-top:3vh;
+        }
+
+        .imgFoto{
+            width:100%;
+        }
+
     }
 
     div {
         font-family: 'google_font';
     }
+
+    
     </style>
 <?php
 ?>
-<div class="row" style="margin-top:-10vh">
+<div class="row">
     <div class="col-md-8 text-center tinggi" style="background-color:#245AA7;">
-        <img src="img/home.png" alt="home" width="75%" style="margin-top:2vh">
+        <img class="imgHome" src="img/home.png" alt="home">
         <h3 style="color:white">Selamat Datang</h3>
         <p style="color:white">Sistem informasi absensi online dengan GPS,
         <br>Anda hanya perlu mengambil gambar 
@@ -179,7 +209,7 @@ if(empty($rows)){
 
     <div class="col-md-4 tinggi1">
         <div class="cards">
-            <img class="card-img-top" src="img/foto_absen/<?php echo $image ?>" alt="Card image cap" width="100%">
+            <img class="imgFoto" src="img/foto_absen/<?php echo $image ?>" alt="Card image cap">
             <div class="center">
                 <h5><?php echo"Tanggal: ". $tanggal; ?></h5>
                 <p>Anda Absen pada jam: <?php echo $jam ?> dan Anda mendapatkan Point: <?php echo $point ?> .</p>
