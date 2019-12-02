@@ -107,7 +107,7 @@ if(empty($rows)){
         }
     }
 
-    @media (min-width: 481px) and (max-width: 769px){
+    @media (min-width: 481px) and (max-width: 768px){
         .tinggi{
             height:55vh;
         }
