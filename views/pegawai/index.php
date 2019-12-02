@@ -23,7 +23,7 @@ $this->title = 'Dashboard Admin';
         <div class="row">
             <div class="col-md-3" style="width: 25%;" >
                 <div class="card" style="background:white;">
-                    <span class="badge badge-info ">Jumlah Pegawai</span>
+                    <span class="badge" style="background:blue; width:auto;">Jumlah Pegawai</span>
                     <h1 style="text-align:center"><?= $jml_pegawai?> Orang</h1>
                     <p style="font-size:12px; text-align:center"> jumlah pegawai bulan ini</p>
                 </div>
