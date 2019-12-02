@@ -69,7 +69,7 @@ $this->title = 'Dashboard Admin';
     ]); ?> -->
         
 
-    <table class="table table-bordered table-hover">
+    <table class="table table-bordered">
         <tr class="bg-primary">
             <th>Nama</th>
             <th>Divisi</th>
