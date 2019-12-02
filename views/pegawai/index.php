@@ -19,7 +19,7 @@ $this->title = 'Dashboard Admin';
     }
 </style>
 <div class="pegawai-index">
-    <div class="card" style="width: 100%; margin-bottom:5px; margin-top:-55px;">
+    <div class="card" style="width: 100%; margin-bottom:5px; ">
         <div class="row">
             <div class="col-md-3" style="width: 25%;" >
                 <div class="card" style="background:white;">

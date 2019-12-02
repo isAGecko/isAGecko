@@ -41,7 +41,8 @@ AppAsset::register($this);
             margin-top: 5px;
         }.navbar-toggle{
             background-color: #00a2e9;
-        }.wrap > .container {
+        }
+        .wrap > .container {
             padding: 0px 0px 0px;
         }
     </style>
