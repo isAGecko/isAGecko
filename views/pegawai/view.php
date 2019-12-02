@@ -1,14 +1,21 @@
 <?php
 
-/* @var $this yii\web\View */
 use yii\helpers\Html;
-use yii\bootstrap\ActiveForm;
+use yii\widgets\DetailView;
 
+/* @var $this yii\web\View */
+/* @var $model app\models\Pegawai */
 
+$this->title = $model->id_pegawai;
 $this->params['breadcrumbs'][] = ['label' => 'Pegawais', 'url' => ['index']];
-$this->title = 'Dashboard Admin';
+$this->params['breadcrumbs'][] = $this->title;
+\yii\web\YiiAsset::register($this);
 ?>
-<p>
+<div class="pegawai-view">
+
+    <h1><?= Html::encode($this->title) ?></h1>
+
+    <p>
         <?= Html::a('Update', ['update', 'id' => $model->id_pegawai], ['class' => 'btn btn-primary']) ?>
         <?= Html::a('Delete', ['delete', 'id' => $model->id_pegawai], [
             'class' => 'btn btn-danger',
@@ -33,3 +40,5 @@ $this->title = 'Dashboard Admin';
             'password',
         ],
     ]) ?>
+
+</div>

@@ -61,7 +61,7 @@ AppAsset::register($this);
         'items' => [
             ['label' => 'Home','options'=>['class'=>'nav-link'], 'url' => ['/site/index']],
             ['label' => 'Absensi','options'=>['class'=>'nav-link'], 'url' => ['/site/form-absensi']],
-            ['label' => 'Dashboard','options'=>['class'=>'nav-link'], 'url' => ['/dashboard/index']],
+            ['label' => 'Dashboard','options'=>['class'=>'nav-link'], 'url' => ['/pegawai/index']],
             ['label' => 'History','options'=>['class'=>'nav-link'], 'url' => ['/absensi/index']],
             Yii::$app->user->isGuest ? (
                 ['label' => 'Login', 'url' => ['/site/login']]
