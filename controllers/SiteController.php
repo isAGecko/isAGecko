@@ -188,10 +188,8 @@ class SiteController extends Controller
                     return $miles;
                 }
             }
-            $point=0;
-            //yang kedua adalah kantor
             $terlambat= $diff->h.":".$diff->i.":".$diff->s;
-            $jarak=distance($latitude, $longitude, -7.150996, 110.140281, "K")*1000;
+            $jarak=distance($latitude, $longitude, -7.118156, 112.422507, "K")*1000;
             //sampai sini pengaturan jaraknya gan
             if($diff->h>=2){
                 $point=50;
@@ -200,33 +198,22 @@ class SiteController extends Controller
             }elseif($diff->h<1){
                 $point=100;
             }
-            $points=new Point();
             $cekPoint = Yii::$app->db->createCommand("SELECT id_pegawai,total_point FROM point WHERE id_pegawai='$nama_pegawai'")
             ->queryAll();
-            if(!empty($cekPoint[0]['total_point'])){
-                $point_sekarang=$cekPoint[0]['total_point'];
-                $total_point=$point_sekarang+$point;
-            }else{
-                $point_sekarang=0;
-                $total_point=$point_sekarang+$point;
-            }
-            if(!empty($cekPoint)){
-                $insertPoint = Yii::$app->db->createCommand()
-                ->update('point', ['total_point' => $total_point], ['id_pegawai'=>$nama_pegawai])
-                ->execute();
-            }else{
+            if(empty($cekPoint[0]['total_point'])){
+                $points=new Point();
                 $points->id_pegawai=$nama_pegawai;
                 $points->total_point=$point;
                 $points->save();
-            }            
-            $points->id_pegawai=$nama_pegawai;
-            $points->total_point=$point;
-            $points->save();
-            $foto='jaya.jpg';
+            }else{
+                Yii::$app->db->createCommand()
+                ->update('point', ['total_point' => new \yii\db\Expression('total_point + '.$point)], ['id_pegawai'=>$nama_pegawai])
+                ->execute();
+            }
             $hariini=date('Y-m-d');
             $rows = Yii::$app->db->createCommand("SELECT id_pegawai,tanggal FROM absensi WHERE id_pegawai='$nama_pegawai' && tanggal='$hariini'")
             ->queryAll();
-            if($dt->isWednesday()){
+            if($dt->isSunday()){
                 Yii::$app->session->setFlash('Gagal','Hari Libur ini Bang');
                 return $this->render('form-absensi', ['model' => $model]);
             }else if($jarak>100){
