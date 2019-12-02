@@ -5,6 +5,15 @@ use yii\helpers\Html;
 use yii\bootstrap\ActiveForm;
 
 $this->title = 'Absensi Karyawan';
+if(empty($rows)){
+    $jam=0;
+    $tanggal=0;
+    $point=0;
+}else{
+    $jam=$rows[0]['jam'];
+    $tanggal=$rows[0]['tanggal'];
+    $point=$rows[0]['point'];
+}
 ?>
 <style>
     /* @media only screen and (max-width: 768px) { */
@@ -64,7 +73,7 @@ $this->title = 'Absensi Karyawan';
         }
 
         .cards {
-            background-color: whitesmoke; width: 25rem;border-radius: 8px;padding: 12px; 
+            background-color: whitesmoke; width: 25rem;padding: 12px; 
             box-shadow: 8px 9px 6px 0px #00000042; margin: 0;
             display: flex;
             position: absolute;
@@ -97,7 +106,7 @@ $this->title = 'Absensi Karyawan';
         }
 
         .cards {
-            background-color: whitesmoke; width: 25rem;border-radius: 8px;padding: 12px; 
+            background-color: whitesmoke; width: 25rem;padding: 12px; 
             box-shadow: 8px 9px 6px 0px #00000042; margin: 0;
             display: flex;
             position: absolute;
@@ -130,7 +139,7 @@ $this->title = 'Absensi Karyawan';
         }
 
         .cards {
-            background-color: whitesmoke; width: 25rem;border-radius: 8px;padding: 15px; 
+            background-color: whitesmoke; width: 25rem;padding: 15px; 
             box-shadow: 8px 9px 6px 0px #00000042; margin: 0;
             position: absolute;
             top: 50%;
@@ -168,10 +177,10 @@ $this->title = 'Absensi Karyawan';
 
     <div class="col-md-4 tinggi1">
         <div class="cards">
-            <img class="card-img-top" src="img/<?php echo $rows[0]['foto'] ?>" alt="Card image cap" width="100%">
+            <img class="card-img-top" src="img/foto1.jpg" alt="Card image cap" width="100%">
             <div class="center">
-                <h5><?php echo"Tanggal: ". $rows[0]['tanggal']; ?></h5>
-                <p>Anda Absen pada jam: <?php echo $rows[0]['jam'] ?> dan Anda mendapatkan Point: <?php echo $rows[0]['point']; ?> .</p>
+                <h5><?php echo"Tanggal: ". $tanggal; ?></h5>
+                <p>Anda Absen pada jam: <?php echo $jam ?> dan Anda mendapatkan Point: <?php echo $point ?> .</p>
                 <!-- <a href="#" class="btn btn-primary">Detail!</a> -->
             </div>
         </div>

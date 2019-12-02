@@ -48,6 +48,9 @@ date_default_timezone_set('Asia/Jakarta');
                 if(Yii::$app->session->hasFlash('Gagal')){
                     echo "<div class='alert alert-danger'>". Yii::$app->session->getFlash('Gagal')."</div>";
                 }
+                if(Yii::$app->session->hasFlash('Sukses')){
+                    echo "<div class='alert alert-success'>". Yii::$app->session->getFlash('Sukses')."</div>";
+                }
             ?>
         <button type="button" class="tombol-ambil-gambar" data-toggle="modal" data-target="#myModal" >
             <div class="box-photo" onclick="" style=" background-color: #f5f2f254; width: 100%;  line-height: 300px; border-style: dotted; border-color: darkgrey;">
@@ -99,6 +102,11 @@ date_default_timezone_set('Asia/Jakarta');
             </td>
         </tr>
         <tr>
+            <td>
+            <input type="text" class="form-control" name="canvasImg" id="canvasImg">
+            </td>
+        </tr>
+        <tr>
         <br>
         <?= Html::submitButton('Submit', array('class' => 'btn btn-primary', 'style' => 'width:100%; border-radius:0px;')) ?>
         </tr>
@@ -123,12 +131,13 @@ date_default_timezone_set('Asia/Jakarta');
         </div>
         <!-- Modal footer -->
         <div class="modal-footer">
-            <button type="button" class="btn btn-primary" data-dismiss="modal" id="capture" style="display: block; margin-right: auto; margin-left: auto">Ambil!</button>
+            <button type="button" class="btn btn-primary" onclick="saveImage()" data-dismiss="modal" id="capture" style="display: block; margin-right: auto; margin-left: auto">Ambil!</button>
         </div>
         </div>
     </div>
 </div>
 <script type="text/javascript">
+//Download Canvas Image
     var kanvas=$('#canvas');
     kanvas.hide();
     // seleksi elemen video
@@ -160,6 +169,9 @@ date_default_timezone_set('Asia/Jakarta');
         kanvas.show();
         $('.box-photo').css({'line-height': '100%'});
         context.drawImage(video, 0, 0, 380, 300);
+        var canvas = document.getElementById('canvas');
+        var dataURL = canvas.toDataURL();
+        document.getElementById('canvasImg').value = dataURL;
     });
     $(document).ready(function() {
         if (navigator.geolocation) {

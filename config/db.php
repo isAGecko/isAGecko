@@ -2,7 +2,7 @@
 
 return [
     'class' => 'yii\db\Connection',
-    'dsn' => 'mysql:host=localhost;dbname=isagecko',
+    'dsn' => 'mysql:host=localhost;dbname=isagecko_db',
     'username' => 'root',
     'password' => '',
     'charset' => 'utf8',
