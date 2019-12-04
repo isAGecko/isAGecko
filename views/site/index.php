@@ -9,10 +9,12 @@ if(empty($rows)){
     $jam=0;
     $tanggal=0;
     $point=0;
+    $image='foto1.jpg';
 }else{
     $jam=$rows[0]['jam'];
     $tanggal=$rows[0]['tanggal'];
     $point=$rows[0]['point'];
+    $image=$rows[0]['foto'];
 }
 ?>
 <style>
@@ -177,7 +179,7 @@ if(empty($rows)){
 
     <div class="col-md-4 tinggi1">
         <div class="cards">
-            <img class="card-img-top" src="img/foto1.jpg" alt="Card image cap" width="100%">
+            <img class="card-img-top" src="img/foto_absen/<?php echo $image ?>" alt="Card image cap" width="100%">
             <div class="center">
                 <h5><?php echo"Tanggal: ". $tanggal; ?></h5>
                 <p>Anda Absen pada jam: <?php echo $jam ?> dan Anda mendapatkan Point: <?php echo $point ?> .</p>
