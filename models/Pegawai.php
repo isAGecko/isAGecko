@@ -34,9 +34,11 @@ class Pegawai extends \yii\db\ActiveRecord
     {
         return [
             [['id_pegawai', 'id_point', 'id_jabatan', 'nama_pegawai', 'nomor_telp', 'alamat', 'email', 'gender', 'password'], 'required'],
-            [['id_pegawai', 'id_point', 'id_jabatan', 'nomor_telp'], 'integer'],
+            [['id_pegawai', 'id_point', 'nomor_telp'], 'integer'],
             [['nama_pegawai'], 'string', 'max' => 35],
-            [['alamat', 'email'], 'string', 'max' => 50],
+            [['alamat'], 'string', 'max' => 50],
+            [['id_jabatan'], 'string', 'max' => 50],
+            [[ 'email'], 'email'],
             [['gender', 'password'], 'string', 'max' => 25],
             [['id_pegawai'], 'unique'],
         ];
