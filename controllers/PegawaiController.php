@@ -10,6 +10,7 @@ use app\models\PegawaiSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\db\Command;
 
 /**
  * PegawaiController implements the CRUD actions for Pegawai model.
@@ -76,12 +77,52 @@ class PegawaiController extends Controller
     {
         $model = new Pegawai();
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id_pegawai]);
+        $dataPegawai = Yii::$app->db->createCommand("SELECT * FROM jabatan")
+                            ->queryAll();
+
+        if($model->load(Yii::$app->request->post(), '')){
+            // print_r(Yii::$app->request->post());
+            $nama_pegawai = $_POST['Pegawai']['nama_pegawai'];
+            $alamat = $_POST['Pegawai']['alamat'];
+            $gender = $_POST['Pegawai']['gender'];
+            $email = $_POST['Pegawai']['email'];
+            $nomor_telp = $_POST['Pegawai']['nomor_telp'];
+            $password = $_POST['Pegawai']['password'];
+            $id_jabatan = $_POST['Pegawai']['id_jabatan'];
+            $id_point = 1;
+            // die();
+            $model->nama_pegawai = $nama_pegawai;
+            $model->alamat = $alamat;
+            $model->gender = $gender;
+            $model->email = $email;
+            $model->nomor_telp = $nomor_telp;
+            $model->password = $password;
+            $model->id_jabatan = $id_jabatan;
+            $model->id_point = $id_point;
+
+            // $connection->createCommand()->insert('pegawai',
+            //         [
+            //             'name_pegawai' => $nama_pegawai,
+            //             'alamat' => $alamat,
+            //             'gender' => $gender,
+            //             'email' => $email,
+            //             'nomor_telp' => $nomor_telp,
+            //             'password' => $password,
+            //             'id_jabatan' => $id_jabatan,
+            //             'id_point' => $id_point,
+            //         ])
+            // //         ->execute();
+            // print_r(Yii::$app->request->post());
+            $model->save(false);
+            // var_dump($model->save(false));
+            
+            return $this->redirect(['pegawai/index']);
         }
+
 
         return $this->render('create', [
             'model' => $model,
+            'dataPegawai' => $dataPegawai,
         ]);
     }
 
