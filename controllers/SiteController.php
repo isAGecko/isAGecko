@@ -200,7 +200,7 @@ class SiteController extends Controller
                 }
             }
             $terlambat= $diff->h.":".$diff->i.":".$diff->s;
-            $jarak=distance($latitude, $longitude, -7.118156, 112.422507, "K")*1000;
+            $jarak=distance($latitude, $longitude, -7.122305, 112.421892, "K")*1000;
             //sampai sini pengaturan jaraknya gan
             if($diff->h>=2){
                 $point=50;
