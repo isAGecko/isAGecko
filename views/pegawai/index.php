@@ -105,11 +105,11 @@ $this->title = 'Dashboard Admin';
                 <div class="card">
                     <span class="badge" style="background:#245AA7; width:auto;">Jumlah Pegawai</span>
                     <h1 style="text-align:center;color:#245AA7"><?= $jml_pegawai?> Orang</h1>
-                    <p style="font-size:12px; text-align:center;color:#245AA7"> jumlah pegawai bulan ini</p>
+                    <p style="font-size:12px; text-align:center;color:#245AA7"> Jumlah pegawai bulan ini</p>
                 </div>
             </div>
 
-            <a href="#absen">
+            <a id="btn" href="#absen">
                 <div class="col-md-3 col-sm-4">
                     <div class="card">
                         <span class="badge" style="background:#F96478; width:auto;">Jumlah Absensi</span>
@@ -118,6 +118,7 @@ $this->title = 'Dashboard Admin';
                     </div>
                 </div>
             </a>
+
             <div class="col-md-3 col-sm-4">
                 <div class="card">
                     <span class="badge" style="background:#327D4D; width:auto;">Jumlah Pegawai</span>
@@ -245,3 +246,16 @@ $this->title = 'Dashboard Admin';
         </div>
     </div>
 </div>
+
+<script>
+    $(document).ready(() => {
+    const pictureBox = $('#btn');
+    const messageBox = $('#absen');
+
+    pictureBox.click(function() {
+        $('html, body').animate({
+            scrollTop: messageBox.offset().top
+            }, 2000);
+        })
+    })
+</script>
