@@ -124,7 +124,6 @@ $this->title = 'Dashboard Admin';
             </div>
         </div>
     </div>
-    <div class="card" style="width: 100%;">
     <?php
         if(Yii::$app->session->hasFlash('Gagal')){
             echo "<div class='alert alert-danger'>". Yii::$app->session->getFlash('Gagal')."</div>";
