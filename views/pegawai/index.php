@@ -11,31 +11,115 @@ $this->title = 'Dashboard Admin';
 ?>
 
 <style>
-    .card{
-        background-color: whitesmoke; border-radius: 8px;padding: 15px; 
+
+    @media only screen and (max-width: 480px){ 
+        
+        .card{
+            background:white;
+            border-radius: 8px;
+            padding: 10px;
+            box-shadow: 8px 9px 6px 0px #0000001c;
+            margin-bottom:2vh; 
+        }
+
+        .backCard h1 {
+            margin-top:0px;
+            margin-bottom:5px;
+        }
+
+        .backCard{
+            background:#f9f9f9;
+            border-radius: 8px;
+            padding: 15px;
+            padding-bottom: 40px;
+            width: 100%; 
+            margin-bottom:5px;
+        }
+
+        .marge{
+            margin-top:-1vh;
+            margin-bottom:2vh;
+            color:#acacac;
+        }
+    }
+
+    @media (min-width: 481px) and (max-width: 768px){ 
+        
+        .card{
+            background:white;
+            border-radius: 8px;
+            padding: 10px;
+            box-shadow: 8px 9px 6px 0px #0000001c; 
+        }
+        .backCard{
+            background:#f9f9f9;
+            border-radius: 8px;
+            padding: 15px;
+            padding-bottom: 40px;
+            width: 100%; 
+            margin-bottom:5px;
+        }
+
+        .marge{
+            margin-top:-1vh;
+            margin-bottom:2vh;
+            color:#acacac;
+        }
+    }
+
+    @media only screen and (min-width: 769px){ 
+        .paddingCard{
+            padding-left:2vh;
+        }
+        .card{
+            background:white;
+            border-radius: 8px;
+            padding: 10px;
+            box-shadow: 8px 9px 6px 0px #0000001c; 
+        }
+        .backCard{
+            background:#f9f9f9;
+            border-radius: 8px;
+            padding: 15px;
+            padding-bottom: 40px;
+            width: 100%; 
+            margin-bottom:5px;
+        }
+
+        .marge{
+            margin-top:-1vh;
+            margin-bottom:4vh;
+            color:#acacac;
+        }
     }
     div {
         font-family: 'google_font';
     }
 </style>
 <div class="pegawai-index">
-    <div class="card" style="width: 100%; margin-bottom:5px; ">
-        <div class="row">
-            <div class="col-md-3" style="width: 25%;" >
-                <div class="card" style="background:white;">
-                    <span class="badge" style="background:blue; width:auto;">Jumlah Pegawai</span>
-                    <h1 style="text-align:center"><?= $jml_pegawai?> Orang</h1>
-                    <p style="font-size:12px; text-align:center"> jumlah pegawai bulan ini</p>
+    <div class="backCard">
+        <h4 style="color:#245AA7">Hello ! Abidurochman</h4>
+        <p class="marge">Good morning ! have a nice day</p>
+        <div class="row paddingCard">
+            <div class="col-md-3 col-sm-4">
+                <div class="card">
+                    <span class="badge" style="background:#245AA7; width:auto;">Jumlah Pegawai</span>
+                    <h1 style="text-align:center;color:#245AA7"><?= $jml_pegawai?> Orang</h1>
+                    <p style="font-size:12px; text-align:center;color:#245AA7"> jumlah pegawai bulan ini</p>
                 </div>
             </div>
-            <div class="col-md-3" style="width: 25%;">
-                <div class="card" style="background:white;">
-                    <p>Nyoba</p>
+            <div class="col-md-3 col-sm-4">
+                <div class="card">
+                    <span class="badge" style="background:#F96478; width:auto;">Jumlah Pegawai</span>
+                    <h1 style="text-align:center;color:#F96478"><?= $jml_pegawai?> Orang</h1>
+                    <p style="font-size:12px; text-align:center;color:#F96478"> jumlah pegawai bulan ini</p>
                 </div>
             </div>
-            <div class="col-md-3" style="width: 25%;">
-                <div class="card" style="background:white;">
-                    <p>Nyoba</p>
+            <div class="col-md-3 col-sm-4">
+                <div class="card">
+                    <span class="badge" style="background:#327D4D; width:auto;">Jumlah Pegawai</span>
+                    <h1 style="text-align:center;color:#327D4D"><?= $jml_pegawai?> Orang</h1>
+                    <p style="font-size:12px; text-align:center;color:#327D4D"> jumlah pegawai bulan ini</p>
                 </div>
             </div>
         </div>
@@ -49,6 +133,7 @@ $this->title = 'Dashboard Admin';
             echo "<div class='alert alert-success'>". Yii::$app->session->getFlash('Sukses')."</div>";
         }
     ?>
+    <div class="backCard" style="width: 100%;">
     <p>
         <?= Html::a('+ Pegawai', ['create']) ?>
     </p>
