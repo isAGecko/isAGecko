@@ -1,21 +1,288 @@
 <?php
 
+
+use yii\widgets\ActiveForm;
+use yii\helpers\Url;
 use yii\helpers\Html;
+
 
 /* @var $this yii\web\View */
 /* @var $model app\models\Pegawai */
 
-$this->title = 'Update Pegawai: ' . $model->id_pegawai;
-$this->params['breadcrumbs'][] = ['label' => 'Pegawais', 'url' => ['index']];
-$this->params['breadcrumbs'][] = ['label' => $model->id_pegawai, 'url' => ['view', 'id' => $model->id_pegawai]];
-$this->params['breadcrumbs'][] = 'Update';
+$this->title = 'Update Pegawai';
 ?>
-<div class="pegawai-update">
+<style>
 
-    <h1><?= Html::encode($this->title) ?></h1>
+@media only screen and (max-width: 480px){
 
-    <?= $this->render('_form', [
-        'model' => $model,
-    ]) ?>
+    .content-center{
+        align-content:center;
+    }
 
+    .mt2vh{
+        margin-top:2vh;
+    }
+    .mt2vh2{
+        margin-top:2vh;
+    }
+
+    .mb7vh{
+        margin-bottom:5vh;
+    }
+    
+    .pd1vh{
+        padding:1vh;
+    }
+
+    .box-left{
+        border-color:white;
+        border-style:solid;
+        border-left-style:none;
+        border-right-style:none;
+        padding-top:1vh;
+    }
+
+    .box-right{
+        border-color:white;
+        border-style:solid;
+        border-right-style:none;
+        padding-top:1vh;
+    }
+
+    .image{
+        width:150px;
+        height:150px;
+        object-fit:cover;
+        border-radius:50%;
+        margin-left:11.8vh;
+    }
+    .card{
+        background-color: whitesmoke;
+        height:100%; 
+        padding:2vh; 
+        margin-bottom:2vh; 
+    }
+
+    div {
+        font-family: 'google_font';
+    }
+}
+
+@media (min-width: 481px) and (max-width: 768px){
+
+
+
+    .mt2vh{
+        margin-top:2vh;
+    }
+
+    .mb7vh{
+        margin-bottom:5vh;
+    }
+    
+    .pd1vh{
+        padding:1vh;
+    }
+
+    .box-left{
+        border-color:white;
+        border-style:solid;
+        border-left-style:none;
+        border-right-style:none;
+        padding-top:1vh;
+    }
+
+    .box-right{
+        border-color:white;
+        border-style:solid;
+        border-right-style:none;
+        padding-top:1vh;
+    }
+
+    .image{
+        width:150px;
+        height:150px;
+        object-fit:cover;
+        border-radius:50%;
+        margin-left:9vh;
+    }
+    .card{
+        background-color: whitesmoke;
+        height:100%; 
+        padding:2vh; 
+        margin-bottom:2vh; 
+    }
+
+    div {
+        font-family: 'google_font';
+    }
+}
+
+@media only screen and (min-width: 769px){
+    .mt2vh{
+        margin-top:2vh;
+    }
+
+    .mt2vh2{
+        margin-top:2vh;
+    }
+
+    .mb7vh{
+        margin-bottom:7vh;
+    }
+    
+    .pd1vh{
+        padding:1vh;
+    }
+
+    .box-left{
+        border-color:white;
+        border-style:solid;
+        border-left-style:none;
+        border-right-style:none;
+        padding-top:1vh;
+    }
+
+    .box-right{
+        border-color:white;
+        border-style:solid;
+        border-right-style:none;
+        padding-top:1vh;
+    }
+
+    .image{
+        width:150px;
+        height:150px;
+        object-fit:cover;
+        border-radius:50%;
+        margin-left:6vh;
+    }
+    .card{
+        background-color: whitesmoke;
+        height:77.7vh; 
+        padding:2vh; 
+        margin-bottom:2vh; 
+    }
+
+    div {
+        font-family: 'google_font';
+    }
+}
+</style>
+<div class="pegawai-create">
+    <div class="row">
+        <?php
+                $form= ActiveForm::begin();
+                ?>
+        <div class="col-md-3 col-sm-12 content-center">
+            <div class="card" style="height:100%">
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-md-12 col-sm-6">
+                            <!-- kodingan ngisor seng img tok iki wehi tombol upload foto-->
+                            <img src="img/jaya.jpg" class="image" width="80%" alt="tambah foto">
+                            
+                            <?php
+                                foreach($dataPegawai as $row){
+                            ?>
+
+                            <p class="mt2vh"><?= $model->nama_pegawai?></p>
+                            <div class="row text-center mt2vh">
+                                <div class="col-md-6 col-sm-6 col-xs-6 box-left">
+                                    <p style="color:#8A8A8A;"><?= $row['nama_jabatan']?></p>
+                                    <p>Devisi</p>
+                                </div>
+                                <div class="col-md-6 col-sm-6 col-xs-6 box-right">
+                                    <p style="color:#8A8A8A;">-</p>
+                                    <p>Tim</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-12 col-sm-6 mt2vh2" style="margin-bottom:-15px">
+                            <p style="margin:0px;">No. Telp</p>
+                            <p style="color:#8A8A8A;padding:1vh"><?= $row['nomor_telp']?></p>
+                            <p style="margin:0px;">Alamat</p>
+                            <p style="color:#8A8A8A;padding:1vh"><?= $row['alamat']?></p>
+                            <p style="margin:0px;">Email</p>
+                            <p class="mb7vh" style="color:#8A8A8A;padding:1vh"><?= $row['email']?></p>
+                            <?= Html::submitButton('Simpan', ['class' => 'btn btn-primary']) ?>
+                            <?php
+                                }
+                            ?>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-9 col-sm-12">
+            <div class="row">
+                <div class="col-md-6 col-sm-12">
+                    <div class="card">
+                        
+                        <h3>Informasi Pribadi</h3>
+                        <p style="color:#8A8A8A;margin-bottom:0.5vh; margin-top:7vh">Alamat</p>
+                        <?= $form->field($model,'alamat')->textInput()->label(false) ?>
+                        <p style="color:#8A8A8A;margin-bottom:0.5vh;margin-top:3vh">Jenis Kelamin</p>
+                        <?= $form->field($model,'gender')->dropdownList([
+                            'Laki-Laki' => 'Laki-Laki', 
+                            'Perempuan' => 'Perempuan'
+                        ],
+                        ['class'=>'form-control','prompt'=>'Select Gender']
+                        )->label(false) ?>
+                        <p style="color:#8A8A8A;margin-bottom:0.5vh;margin-top:3vh">Email</p>
+                        <?= $form->field($model,'email')->textInput()->label(false) ?>
+                        <p style="color:#8A8A8A;margin-bottom:0.5vh;margin-top:3vh">No. Telp</p>
+                        <?= $form->field($model,'nomor_telp')->textInput()->label(false) ?>
+                    </div>
+                </div>
+            
+                <div class="col-md-6 col-sm-12">
+                    <div class="card">
+                        <h3>Informasi Kantor</h3>
+                        <p style="color:#8A8A8A;margin-bottom:0.5vh; margin-top:7vh">Username</p>
+                        <?= $form->field($model,'nama_pegawai')->textInput()->label(false) ?>
+                        <p style="color:#8A8A8A;margin-bottom:0.5vh; margin-top:3vh">Password</p>
+                        <?= $form->field($model,'password')->passwordInput()->label(false) ?>
+                        <p style="color:#8A8A8A;margin-bottom:0.5vh; margin-top:3vh">Id Point</p>
+                        <?= $form->field($model,'id_point')->textInput()->label(false) ?>
+                        <div class="form-group field-pegawai-id_jabatan required">
+                        <!-- <label class="control-label" for="pegawai-id_jabatan">Devisi</label> -->
+                        <p style="color:#8A8A8A;margin-bottom:0.5vh; margin-top:3vh">Divisi</p>
+                        <select class="form-control" id="pegawai-id_jabatan" name="Pegawai[id_jabatan]">
+                                        
+                                        <?php
+                                            foreach($dataPegawai as $row){
+                                        ?>
+                                            <option value= <?=$row['id_jabatan']?>><?=$row['nama_jabatan']?></option>
+                                        <?php
+                                            }
+                                        ?>
+                                        </select>
+                        <div class="help-block"></div>
+                        </div>
+                        
+                        
+                        
+                        <!-- <?php
+                            foreach($dataPegawai as $row){
+                        ?>
+                        <?= $form->field($model,'id_jabatan')->dropdownList([
+                            
+                                $row['id_jabatan'] => $row['nama_jabatan'] 
+                                
+                            ],
+                            ['class'=>"form-control",'prompt'=>'Pilih Jabatan']
+                        ); ?>
+                        <?php
+                            }
+                        ?> -->
+                    </div>
+                </div>
+            </div>
+        </div>
+        <?php
+            ActiveForm::end();
+        ?>
+    </div>
 </div>

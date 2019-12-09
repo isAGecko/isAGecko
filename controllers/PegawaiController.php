@@ -139,13 +139,17 @@ class PegawaiController extends Controller
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
+        
+        $dataPegawai = Yii::$app->db->createCommand("SELECT * FROM pegawai a JOIN jabatan b ON a.id_jabatan = b.id_jabatan Where a.id_pegawai = $id")
+                            ->queryAll();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id_pegawai]);
+            return $this->redirect(['pegawai/index']);
         }
 
         return $this->render('update', [
             'model' => $model,
+            'dataPegawai' => $dataPegawai,
         ]);
     }
 

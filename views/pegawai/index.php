@@ -167,6 +167,7 @@ $this->title = 'Dashboard Admin';
             <th>Nama</th>
             <th>Divisi</th>
             <th>Alamat</th>
+            <th>Action</th>
         </tr>
         <?php
             foreach($dataPegawai as $row){
@@ -175,6 +176,7 @@ $this->title = 'Dashboard Admin';
                 <td><?=$row['nama_pegawai']?></td>
                 <td><?=$row['nama_jabatan']?></td>
                 <td><?=$row['alamat']?></td>
+                <td><?= Html::a('Update', ['pegawai/update', 'id'=>$row['id_pegawai']],['class'=>'label label-primary']) ?></td>
             </tr>
         <?php
             }
