@@ -108,13 +108,16 @@ $this->title = 'Dashboard Admin';
                     <p style="font-size:12px; text-align:center;color:#245AA7"> jumlah pegawai bulan ini</p>
                 </div>
             </div>
-            <div class="col-md-3 col-sm-4">
-                <div class="card">
-                    <span class="badge" style="background:#F96478; width:auto;">Jumlah Pegawai</span>
-                    <h1 style="text-align:center;color:#F96478"><?= $jml_pegawai?> Orang</h1>
-                    <p style="font-size:12px; text-align:center;color:#F96478"> jumlah pegawai bulan ini</p>
+
+            <a href="#absen">
+                <div class="col-md-3 col-sm-4">
+                    <div class="card">
+                        <span class="badge" style="background:#F96478; width:auto;">Jumlah Absensi</span>
+                        <h1 style="text-align:center;color:#F96478"><?= $jml_pegawai?> Orang</h1>
+                        <p style="font-size:12px; text-align:center;color:#F96478"> Jumlah pegawai yang hadir</p>
+                    </div>
                 </div>
-            </div>
+            </a>
             <div class="col-md-3 col-sm-4">
                 <div class="card">
                     <span class="badge" style="background:#327D4D; width:auto;">Jumlah Pegawai</span>
@@ -161,25 +164,120 @@ $this->title = 'Dashboard Admin';
     ]); ?> -->
         
 
-    <table class="table table-bordered">
-        <tr class="bg-primary">
-            <th>Nama</th>
-            <th>Divisi</th>
-            <th>Alamat</th>
-            <th>Action</th>
-        </tr>
+    <div style="width: 100%;">
         <?php
-            foreach($dataPegawai as $row){
-        ?>
-            <tr>
-                <td><?=$row['nama_pegawai']?></td>
-                <td><?=$row['nama_jabatan']?></td>
-                <td><?=$row['alamat']?></td>
-                <td><?= Html::a('Update', ['pegawai/update', 'id'=>$row['id_pegawai']],['class'=>'label label-primary']) ?></td>
-            </tr>
-        <?php
+            if(Yii::$app->session->hasFlash('Gagal')){
+                echo "<div class='alert alert-danger'>". Yii::$app->session->getFlash('Gagal')."</div>";
+            }
+            if(Yii::$app->session->hasFlash('Sukses')){
+                echo "<div class='alert alert-success'>". Yii::$app->session->getFlash('Sukses')."</div>";
             }
         ?>
-    </table>
-</div>
+        <div class="backCard" style="width: 100%;">
+            <p>
+                <?= Html::a('+ Pegawai', ['create']) ?>
+            </p>
+
+            <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
+
+            <!-- <?= GridView::widget([
+                'dataProvider' => $dataProvider, 
+                // 'filterModel' => $searchModel,
+                'columns' => [
+                    // ['class' => 'yii\grid\SerialColumn'],
+                
+
+                    // 'id_pegawai',
+                    // 'id_point',
+                    // 'id_jabatan',
+                    'nama_pegawai',
+                    'nomor_telp',
+                    //'alamat',
+                    //'email:email',
+                    //'gender',
+                    //'password',
+
+                    // ['class' => 'yii\grid\ActionColumn'],
+                ],
+            ]); ?> -->
+                
+
+            <table class="table table-bordered">
+                <tr class="bg-primary">
+                    <th>Nama</th>
+                    <th>Divisi</th>
+                    <th>Alamat</th>
+                    <th>Action</th>
+                </tr>
+                <?php
+                    foreach($dataPegawai as $row){
+                ?>
+                    <tr>
+                        <td><?=$row['nama_pegawai']?></td>
+                        <td><?=$row['nama_jabatan']?></td>
+                        <td><?=$row['alamat']?></td>
+                        <td><?= Html::a('Update', ['pegawai/update', 'id'=>$row['id_pegawai']],['class'=>'label label-primary']) ?></td>
+                    </tr>
+                <?php
+                    }
+                ?>
+            </table>
+        </div>
+    </div>
+
+    <div id="absen" style="width: 100%;">
+        <?php
+            if(Yii::$app->session->hasFlash('Gagal')){
+                echo "<div class='alert alert-danger'>". Yii::$app->session->getFlash('Gagal')."</div>";
+            }
+            if(Yii::$app->session->hasFlash('Sukses')){
+                echo "<div class='alert alert-success'>". Yii::$app->session->getFlash('Sukses')."</div>";
+            }
+        ?>
+        <div class="backCard" style="width: 100%;">
+          
+            <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
+
+            <!-- <?= GridView::widget([
+                'dataProvider' => $dataProvider, 
+                // 'filterModel' => $searchModel,
+                'columns' => [
+                    // ['class' => 'yii\grid\SerialColumn'],
+                
+
+                    // 'id_pegawai',
+                    // 'id_point',
+                    // 'id_jabatan',
+                    'nama_pegawai',
+                    'nomor_telp',
+                    //'alamat',
+                    //'email:email',
+                    //'gender',
+                    //'password',
+
+                    // ['class' => 'yii\grid\ActionColumn'],
+                ],
+            ]); ?> -->
+                
+
+            <table class="table table-bordered">
+                <tr class="bg-primary">
+                    <th>Nama</th>
+                    <th>Tanggal</th>
+                    <th>Keterangan</th>
+                </tr>
+                <?php
+                    foreach($dataPegawai as $row){
+                ?>
+                    <tr>
+                        <td><?=$row['nama_pegawai']?></td>
+                        <td><?=$row['nama_jabatan']?></td>
+                        <td><?=$row['alamat']?></td>
+                    </tr>
+                <?php
+                    }
+                ?>
+            </table>
+        </div>
+    </div>
 </div>
