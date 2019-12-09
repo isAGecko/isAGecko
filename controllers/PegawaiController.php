@@ -43,15 +43,22 @@ class PegawaiController extends Controller
         
         $dataPegawai = Yii::$app->db->createCommand("SELECT * FROM pegawai a JOIN jabatan b ON a.id_jabatan = b.id_jabatan")
                             ->queryAll();
+        
+        $dataAbsensi = Yii::$app->db->createCommand("SELECT * FROM `absensi` WHERE `tanggal`=CURRENT_DATE")
+                            ->queryAll();
 
         $jml_pegawai = count($dataPegawai);
+        
+        $jml_absensi = count($dataAbsensi);
         // $dataPegawai = $searchModel::find()->all();
 
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
             'dataPegawai' => $dataPegawai,
+            'dataAbsensi' => $dataAbsensi,
             'jml_pegawai' => $jml_pegawai,
+            'jml_absensi' => $jml_absensi,
         ]);
     }
 

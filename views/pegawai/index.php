@@ -113,7 +113,7 @@ $this->title = 'Dashboard Admin';
                 <div class="col-md-3 col-sm-4">
                     <div class="card">
                         <span class="badge" style="background:#F96478; width:auto;">Jumlah Absensi</span>
-                        <h1 style="text-align:center;color:#F96478"><?= $jml_pegawai?> Orang</h1>
+                        <h1 style="text-align:center;color:#F96478"><?= $jml_absensi?> Orang</h1>
                         <p style="font-size:12px; text-align:center;color:#F96478"> Jumlah pegawai yang hadir</p>
                     </div>
                 </div>
@@ -136,6 +136,7 @@ $this->title = 'Dashboard Admin';
         }
     ?>
     <div class="backCard" style="width: 100%;">
+    <h1 style="text-align:center;">Data Pegawai</h1>
     <p>
         <?= Html::a('+ Pegawai', ['create']) ?>
     </p>
@@ -164,43 +165,7 @@ $this->title = 'Dashboard Admin';
     ]); ?> -->
         
 
-    <div style="width: 100%;">
-        <?php
-            if(Yii::$app->session->hasFlash('Gagal')){
-                echo "<div class='alert alert-danger'>". Yii::$app->session->getFlash('Gagal')."</div>";
-            }
-            if(Yii::$app->session->hasFlash('Sukses')){
-                echo "<div class='alert alert-success'>". Yii::$app->session->getFlash('Sukses')."</div>";
-            }
-        ?>
-        <div class="backCard" style="width: 100%;">
-            <p>
-                <?= Html::a('+ Pegawai', ['create']) ?>
-            </p>
-
-            <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
-
-            <!-- <?= GridView::widget([
-                'dataProvider' => $dataProvider, 
-                // 'filterModel' => $searchModel,
-                'columns' => [
-                    // ['class' => 'yii\grid\SerialColumn'],
-                
-
-                    // 'id_pegawai',
-                    // 'id_point',
-                    // 'id_jabatan',
-                    'nama_pegawai',
-                    'nomor_telp',
-                    //'alamat',
-                    //'email:email',
-                    //'gender',
-                    //'password',
-
-                    // ['class' => 'yii\grid\ActionColumn'],
-                ],
-            ]); ?> -->
-                
+  
 
             <table class="table table-bordered">
                 <tr class="bg-primary">
@@ -235,7 +200,9 @@ $this->title = 'Dashboard Admin';
             }
         ?>
         <div class="backCard" style="width: 100%;">
-          
+            
+        <h1 style="text-align:center;">Data Absensi</h1>
+        
             <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
             <!-- <?= GridView::widget([
@@ -267,12 +234,12 @@ $this->title = 'Dashboard Admin';
                     <th>Keterangan</th>
                 </tr>
                 <?php
-                    foreach($dataPegawai as $row){
+                    foreach($dataAbsensi as $row){
                 ?>
                     <tr>
-                        <td><?=$row['nama_pegawai']?></td>
-                        <td><?=$row['nama_jabatan']?></td>
-                        <td><?=$row['alamat']?></td>
+                        <td><?=$row['id_pegawai']?></td>
+                        <td><?=$row['tanggal']?></td>
+                        <td><?=$row['keterangan']?></td>
                     </tr>
                 <?php
                     }
