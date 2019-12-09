@@ -124,63 +124,121 @@ $this->title = 'Dashboard Admin';
             </div>
         </div>
     </div>
-    <div class="card" style="width: 100%;">
-    <?php
-        if(Yii::$app->session->hasFlash('Gagal')){
-            echo "<div class='alert alert-danger'>". Yii::$app->session->getFlash('Gagal')."</div>";
-        }
-        if(Yii::$app->session->hasFlash('Sukses')){
-            echo "<div class='alert alert-success'>". Yii::$app->session->getFlash('Sukses')."</div>";
-        }
-    ?>
-    <div class="backCard" style="width: 100%;">
-    <p>
-        <?= Html::a('+ Pegawai', ['create']) ?>
-    </p>
 
-    <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
-
-    <!-- <?= GridView::widget([
-        'dataProvider' => $dataProvider, 
-        // 'filterModel' => $searchModel,
-        'columns' => [
-            // ['class' => 'yii\grid\SerialColumn'],
-        
-
-            // 'id_pegawai',
-            // 'id_point',
-            // 'id_jabatan',
-            'nama_pegawai',
-            'nomor_telp',
-            //'alamat',
-            //'email:email',
-            //'gender',
-            //'password',
-
-            // ['class' => 'yii\grid\ActionColumn'],
-        ],
-    ]); ?> -->
-        
-
-    <table class="table table-bordered">
-        <tr class="bg-primary">
-            <th>Nama</th>
-            <th>Divisi</th>
-            <th>Alamat</th>
-            <th>Action</th>
-        </tr>
+    <div style="width: 100%;">
         <?php
-            foreach($dataPegawai as $row){
-        ?>
-            <tr>
-                <td><?=$row['nama_pegawai']?></td>
-                <td><?=$row['nama_jabatan']?></td>
-                <td><?=$row['alamat']?></td>
-                <td><?= Html::a('Update', ['pegawai/update', 'id'=>$row['id_pegawai']],['class'=>'label label-primary']) ?></td>
-            </tr>
-        <?php
+            if(Yii::$app->session->hasFlash('Gagal')){
+                echo "<div class='alert alert-danger'>". Yii::$app->session->getFlash('Gagal')."</div>";
+            }
+            if(Yii::$app->session->hasFlash('Sukses')){
+                echo "<div class='alert alert-success'>". Yii::$app->session->getFlash('Sukses')."</div>";
             }
         ?>
-    </table>
-</div>
+        <div class="backCard" style="width: 100%;">
+            <p>
+                <?= Html::a('+ Pegawai', ['create']) ?>
+            </p>
+
+            <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
+
+            <!-- <?= GridView::widget([
+                'dataProvider' => $dataProvider, 
+                // 'filterModel' => $searchModel,
+                'columns' => [
+                    // ['class' => 'yii\grid\SerialColumn'],
+                
+
+                    // 'id_pegawai',
+                    // 'id_point',
+                    // 'id_jabatan',
+                    'nama_pegawai',
+                    'nomor_telp',
+                    //'alamat',
+                    //'email:email',
+                    //'gender',
+                    //'password',
+
+                    // ['class' => 'yii\grid\ActionColumn'],
+                ],
+            ]); ?> -->
+                
+
+            <table class="table table-bordered">
+                <tr class="bg-primary">
+                    <th>Nama</th>
+                    <th>Divisi</th>
+                    <th>Alamat</th>
+                    <th>Action</th>
+                </tr>
+                <?php
+                    foreach($dataPegawai as $row){
+                ?>
+                    <tr>
+                        <td><?=$row['nama_pegawai']?></td>
+                        <td><?=$row['nama_jabatan']?></td>
+                        <td><?=$row['alamat']?></td>
+                        <td><?= Html::a('Update', ['pegawai/update', 'id'=>$row['id_pegawai']],['class'=>'label label-primary']) ?></td>
+                    </tr>
+                <?php
+                    }
+                ?>
+            </table>
+        </div>
+    </div>
+
+    <div style="width: 100%;">
+        <?php
+            if(Yii::$app->session->hasFlash('Gagal')){
+                echo "<div class='alert alert-danger'>". Yii::$app->session->getFlash('Gagal')."</div>";
+            }
+            if(Yii::$app->session->hasFlash('Sukses')){
+                echo "<div class='alert alert-success'>". Yii::$app->session->getFlash('Sukses')."</div>";
+            }
+        ?>
+        <div class="backCard" style="width: 100%;">
+          
+            <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
+
+            <!-- <?= GridView::widget([
+                'dataProvider' => $dataProvider, 
+                // 'filterModel' => $searchModel,
+                'columns' => [
+                    // ['class' => 'yii\grid\SerialColumn'],
+                
+
+                    // 'id_pegawai',
+                    // 'id_point',
+                    // 'id_jabatan',
+                    'nama_pegawai',
+                    'nomor_telp',
+                    //'alamat',
+                    //'email:email',
+                    //'gender',
+                    //'password',
+
+                    // ['class' => 'yii\grid\ActionColumn'],
+                ],
+            ]); ?> -->
+                
+
+            <table class="table table-bordered">
+                <tr class="bg-primary">
+                    <th>Nama</th>
+                    <th>Tanggal</th>
+                    <th>Keterangan</th>
+                </tr>
+                <?php
+                    foreach($dataPegawai as $row){
+                ?>
+                    <tr>
+                        <td><?=$row['nama_pegawai']?></td>
+                        <td><?=$row['nama_jabatan']?></td>
+                        <td><?=$row['alamat']?></td>
+                    </tr>
+                <?php
+                    }
+                ?>
+            </table>
+        </div>
+    </div>
 </div>
