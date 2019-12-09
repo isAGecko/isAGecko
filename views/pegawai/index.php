@@ -108,13 +108,16 @@ $this->title = 'Dashboard Admin';
                     <p style="font-size:12px; text-align:center;color:#245AA7"> jumlah pegawai bulan ini</p>
                 </div>
             </div>
-            <div class="col-md-3 col-sm-4">
-                <div class="card">
-                    <span class="badge" style="background:#F96478; width:auto;">Jumlah Pegawai</span>
-                    <h1 style="text-align:center;color:#F96478"><?= $jml_pegawai?> Orang</h1>
-                    <p style="font-size:12px; text-align:center;color:#F96478"> jumlah pegawai bulan ini</p>
+
+            <a href="#absen">
+                <div class="col-md-3 col-sm-4">
+                    <div class="card">
+                        <span class="badge" style="background:#F96478; width:auto;">Jumlah Absensi</span>
+                        <h1 style="text-align:center;color:#F96478"><?= $jml_pegawai?> Orang</h1>
+                        <p style="font-size:12px; text-align:center;color:#F96478"> Jumlah pegawai yang hadir</p>
+                    </div>
                 </div>
-            </div>
+            </a>
             <div class="col-md-3 col-sm-4">
                 <div class="card">
                     <span class="badge" style="background:#327D4D; width:auto;">Jumlah Pegawai</span>
@@ -186,7 +189,7 @@ $this->title = 'Dashboard Admin';
         </div>
     </div>
 
-    <div style="width: 100%;">
+    <div id="absen" style="width: 100%;">
         <?php
             if(Yii::$app->session->hasFlash('Gagal')){
                 echo "<div class='alert alert-danger'>". Yii::$app->session->getFlash('Gagal')."</div>";
