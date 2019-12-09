@@ -89,7 +89,7 @@ class PegawaiController extends Controller
             $nomor_telp = $_POST['Pegawai']['nomor_telp'];
             $password = $_POST['Pegawai']['password'];
             $id_jabatan = $_POST['Pegawai']['id_jabatan'];
-            $id_point = 1;
+            $id_point = $_POST['Pegawai']['id_point'];
             // die();
             $model->nama_pegawai = $nama_pegawai;
             $model->alamat = $alamat;
@@ -113,6 +113,9 @@ class PegawaiController extends Controller
             //         ])
             // //         ->execute();
             // print_r(Yii::$app->request->post());
+
+            Yii::$app->session->setFlash('Sukses','Data Berhasil di Tambahkan');
+
             $model->save(false);
             // var_dump($model->save(false));
             
