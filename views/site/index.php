@@ -198,22 +198,24 @@ if(empty($rows)){
     </style>
 <?php
 ?>
-<div class="row">
-    <div class="col-md-8 text-center tinggi" style="background-color:#245AA7;">
-        <img class="imgHome" src="img/home.png" alt="home">
-        <h3 style="color:white">Selamat Datang</h3>
-        <p style="color:white">Sistem informasi absensi online dengan GPS,
-        <br>Anda hanya perlu mengambil gambar 
-        <br>terbaru Anda dan menekan tombol absen</p>
-    </div>
+<div class="container">
+    <div class="row">
+        <div class="col-md-8 text-center tinggi" style="background-color:#245AA7;">
+            <img class="imgHome" src="img/home.png" alt="home">
+            <h3 style="color:white">Selamat Datang</h3>
+            <p style="color:white">Sistem informasi absensi online dengan GPS,
+            <br>Anda hanya perlu mengambil gambar 
+            <br>terbaru Anda dan menekan tombol absen</p>
+        </div>
 
-    <div class="col-md-4 tinggi1">
-        <div class="cards">
-            <img class="imgFoto" src="img/foto_absen/<?php echo $image ?>" alt="Card image cap">
-            <div class="center">
-                <h5><?php echo"Tanggal: ". $tanggal; ?></h5>
-                <p>Anda Absen pada jam: <?php echo $jam ?> dan Anda mendapatkan Point: <?php echo $point ?> .</p>
-                <!-- <a href="#" class="btn btn-primary">Detail!</a> -->
+        <div class="col-md-4 tinggi1">
+            <div class="cards">
+                <img class="imgFoto" src="img/foto_absen/<?php echo $image ?>" alt="Card image cap">
+                <div class="center">
+                    <h5><?php echo"Tanggal: ". $tanggal; ?></h5>
+                    <p>Anda Absen pada jam: <?php echo $jam ?> dan Anda mendapatkan Point: <?php echo $point ?> .</p>
+                    <!-- <a href="#" class="btn btn-primary">Detail!</a> -->
+                </div>
             </div>
         </div>
     </div>

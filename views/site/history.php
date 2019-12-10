@@ -13,7 +13,8 @@ foreach($dataAbsensi as $data){
     padding: 0px 0px 0px;
 }
 </style>
-<div class="row">
+<div class="container">
+    <div class="row">
     <div class="col-md-8">
         <?php
         if(empty($dataAbsensi)){
@@ -76,4 +77,5 @@ foreach($dataAbsensi as $data){
             </tbody>
         </table>
     </div>
+</div>
 </div>

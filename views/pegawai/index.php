@@ -236,11 +236,16 @@ $this->title = 'Dashboard Admin';
                 </tr>
                 <?php
                     foreach($dataAbsensi as $row){
+                        if($row['keterangan']==0){
+                            $keterangan='Masuk';
+                        }else{
+                            $keterangan='Izin';
+                        }
                 ?>
                     <tr>
                         <td><?=$row['id_pegawai']?></td>
                         <td><?=$row['tanggal']?></td>
-                        <td><?=$row['keterangan']?></td>
+                        <td><?php echo $keterangan?></td>
                     </tr>
                 <?php
                     }

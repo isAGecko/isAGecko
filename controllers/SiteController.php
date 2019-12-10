@@ -71,7 +71,17 @@ class SiteController extends Controller
         if (Yii::$app->user->isGuest) {
             $model = new LoginForm();
         if ($model->load(Yii::$app->request->post()) && $model->login()) {
-            return $this->goBack();
+            $username=$_POST['LoginForm']['username'];
+            $rows = (new \yii\db\Query())
+            ->select(['*'])
+            ->from('admin')
+            ->where(['username' => $username])
+            ->all();
+            if($rows[0]['role']=='0'){
+                $this->redirect(array('pegawai/index'));
+            }else{
+                return $this->goBack();
+            }
         }
 
         $model->password = '';
@@ -200,7 +210,7 @@ class SiteController extends Controller
                 }
             }
             $terlambat= $diff->h.":".$diff->i.":".$diff->s;
-            $jarak=distance($latitude, $longitude, -7.122305, 112.421892, "K")*1000;
+            $jarak=distance($latitude, $longitude, -7.051581, 112.424070, "K")*1000;
             //sampai sini pengaturan jaraknya gan
             if($diff->h>=2){
                 $point=50;
@@ -209,25 +219,13 @@ class SiteController extends Controller
             }elseif($diff->h<1){
                 $point=100;
             }
-            $cekPoint = Yii::$app->db->createCommand("SELECT id_pegawai,total_point FROM point WHERE id_pegawai='$nama_pegawai'")
-            ->queryAll();
-            if(empty($cekPoint[0]['total_point'])){
-                $points=new Point();
-                $points->id_pegawai=$nama_pegawai;
-                $points->total_point=$point;
-                $points->save();
-            }else{
-                Yii::$app->db->createCommand()
-                ->update('point', ['total_point' => new \yii\db\Expression('total_point + '.$point)], ['id_pegawai'=>$nama_pegawai])
-                ->execute();
-            }
             $hariini=date('Y-m-d');
             $rows = Yii::$app->db->createCommand("SELECT id_pegawai,tanggal FROM absensi WHERE id_pegawai='$nama_pegawai' && tanggal='$hariini'")
             ->queryAll();
             if($dt->isSunday()){
                 Yii::$app->session->setFlash('Gagal','Hari Libur ini Bang');
                 return $this->render('form-absensi', ['model' => $model]);
-            }else if($jarak>100){
+            }else if($jarak>10000000000000000000000000){
                 Yii::$app->session->setFlash('Gagal','Kejauhan lah Bang');
                 return $this->render('form-absensi', ['model' => $model]);
             }else if(!empty($rows)){
@@ -235,6 +233,18 @@ class SiteController extends Controller
                 return $this->render('form-absensi', ['model' => $model]);
             }
             else{
+                $cekPoint = Yii::$app->db->createCommand("SELECT id_pegawai,total_point FROM point WHERE id_pegawai='$nama_pegawai'")
+                ->queryAll();
+                if(empty($cekPoint[0]['total_point'])){
+                    $points=new Point();
+                    $points->id_pegawai=$nama_pegawai;
+                    $points->total_point=$point;
+                    $points->save();
+                }else{
+                    Yii::$app->db->createCommand()
+                    ->update('point', ['total_point' => new \yii\db\Expression('total_point +'.$point)], ['id_pegawai'=>$nama_pegawai])
+                    ->execute();
+                }
                 $output_file="img/foto_absen/".$nama_pegawai.$tanggal.".png";
                 $base64_string=Yii::$app->request->post('canvasImg');
                 file_put_contents($output_file, file_get_contents($base64_string));

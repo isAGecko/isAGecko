@@ -52,6 +52,13 @@ AppAsset::register($this);
 <?php $this->beginBody() ?>
 <div class="wrap">
     <?php
+    if(!empty(Yii::$app->user->identity)&&Yii::$app->user->identity->role=='0'){
+        $dash=['label' => 'Dashboard','options'=>['class'=>'nav-link'], 'url' => ['/pegawai/index']];
+        $sign=['label' => 'Sign Up','options'=>['class'=>'nav-link'], 'url' => ['/site/signup']];
+    }else{
+        $dash=['label' => 'Dashboard','options'=>['class'=>'delete'], 'url' => ['/pegawai/index']];
+        $sign=['label' => 'Sign Up','options'=>['class'=>'delete'], 'url' => ['/site/signup']];
+    }
     NavBar::begin([
         'brandLabel' => 'Gecko Absensi',
         'brandUrl' => Yii::$app->homeUrl,
@@ -64,9 +71,9 @@ AppAsset::register($this);
         'items' => [
             ['label' => 'Home','options'=>['class'=>'nav-link'], 'url' => ['/site/index']],
             ['label' => 'Absensi','options'=>['class'=>'nav-link'], 'url' => ['/site/form-absensi']],
-            ['label' => 'Dashboard','options'=>['class'=>'nav-link'], 'url' => ['/pegawai/index']],
+            $dash,
             ['label' => 'History','options'=>['class'=>'nav-link'], 'url' => ['/site/history']],
-            ['label' => 'Sign Up','options'=>['class'=>'nav-link'], 'url' => ['/site/signup']],
+            $sign,
             Yii::$app->user->isGuest ? (
                 ['label' => 'Login', 'url' => ['/site/login']]
             ) : (
@@ -105,3 +112,8 @@ AppAsset::register($this);
 </body>
 </html>
 <?php $this->endPage() ?>
+<script>
+$(document).ready(function() {
+    $( ".delete" ).remove()
+});
+</script>
