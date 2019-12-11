@@ -225,7 +225,7 @@ class SiteController extends Controller
             if($dt->isSunday()){
                 Yii::$app->session->setFlash('Gagal','Hari Libur ini Bang');
                 return $this->render('form-absensi', ['model' => $model]);
-            }else if($jarak>10000000000000000000000000){
+            }else if($jarak>10000000000000000000000000&&$keterangan!=0){
                 Yii::$app->session->setFlash('Gagal','Kejauhan lah Bang');
                 return $this->render('form-absensi', ['model' => $model]);
             }else if(!empty($rows)){

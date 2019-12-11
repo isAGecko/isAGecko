@@ -54,10 +54,8 @@ AppAsset::register($this);
     <?php
     if(!empty(Yii::$app->user->identity)&&Yii::$app->user->identity->role=='0'){
         $dash=['label' => 'Dashboard','options'=>['class'=>'nav-link'], 'url' => ['/pegawai/index']];
-        $sign=['label' => 'Sign Up','options'=>['class'=>'nav-link'], 'url' => ['/site/signup']];
     }else{
         $dash=['label' => 'Dashboard','options'=>['class'=>'delete'], 'url' => ['/pegawai/index']];
-        $sign=['label' => 'Sign Up','options'=>['class'=>'delete'], 'url' => ['/site/signup']];
     }
     NavBar::begin([
         'brandLabel' => 'Gecko Absensi',
@@ -73,7 +71,6 @@ AppAsset::register($this);
             ['label' => 'Absensi','options'=>['class'=>'nav-link'], 'url' => ['/site/form-absensi']],
             $dash,
             ['label' => 'History','options'=>['class'=>'nav-link'], 'url' => ['/site/history']],
-            $sign,
             Yii::$app->user->isGuest ? (
                 ['label' => 'Login', 'url' => ['/site/login']]
             ) : (

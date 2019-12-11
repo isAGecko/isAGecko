@@ -26,9 +26,8 @@ class Jabatan extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['id_jabatan', 'nama_jabatan'], 'required'],
-            [['id_jabatan'], 'integer'],
-            [['nama_jabatan'], 'string', 'max' => 25],
+            [['nama_jabatan'], 'required'],
+            [['nama_jabatan'], 'string', 'max' => 100],
         ];
     }
 

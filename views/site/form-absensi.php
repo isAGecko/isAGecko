@@ -19,6 +19,9 @@ date_default_timezone_set('Asia/Jakarta');
         }[class*="box-photo"] #canvas{
             width: 100%;
         }
+        [class*="box-photo"] #myModal{
+            padding-right: 0px;
+        }
         }
         .tombol-ambil-gambar{
             background: none;
@@ -118,8 +121,8 @@ date_default_timezone_set('Asia/Jakarta');
     </div>
 </div>
 <!-- modal dialog -->
-<div class="modal fade" id="myModal">
-    <div class="modal-dialog">
+<div style="padding-right: -17px;" class="modal fade" id="myModal">
+    <div class="modal-dialog" style="padding-right: 0px;">
         <div class="modal-content">
         <!-- Modal Header -->
         <div class="modal-header">
