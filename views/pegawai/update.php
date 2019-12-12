@@ -252,9 +252,9 @@ $this->title = 'Update Pegawai';
                         <select class="form-control" id="pegawai-id_jabatan" name="Pegawai[id_jabatan]">
                                         
                                         <?php
-                                            foreach($dataPegawai as $row){
+                                            foreach($dataJabatan as $jbt){
                                         ?>
-                                            <option value= <?=$row['id_jabatan']?>><?=$row['nama_jabatan']?></option>
+                                            <option value= <?=$jbt['id_jabatan']?>><?=$jbt['nama_jabatan']?></option>
                                         <?php
                                             }
                                         ?>

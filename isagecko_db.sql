@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 04, 2019 at 04:22 AM
+-- Generation Time: Dec 10, 2019 at 03:06 AM
 -- Server version: 10.4.6-MariaDB
 -- PHP Version: 7.3.8
 
@@ -58,7 +58,13 @@ INSERT INTO `absensi` (`id_absensi`, `id_pegawai`, `tanggal`, `jam`, `terlambat`
 (11, 'admin', '2019-12-01', '07:54:39', '00:05:12', '0', '', 'jaya.jpg', 100),
 (12, 'kadal', '2019-12-01', '09:50:37', '01:50:41', '0', '', 'jaya.jpg', 75),
 (17, 'bayu', '2019-12-02', '06:22:09', '01:37:41', '0', '', 'bayu2019-12-02.png', 75),
-(18, 'bayu', '2019-12-01', '06:23:04', '01:36:46', '0', '', 'bayu2019-12-01.png', 75);
+(18, 'bayu', '2019-12-01', '06:23:04', '01:36:46', '0', '', 'bayu2019-12-01.png', 75),
+(23, 'abid', '2019-12-02', '10:30:41', '02:30:49', '0', '', 'abid2019-12-02.png', 50),
+(24, 'abid', '2019-12-03', '10:32:58', '02:33:09', '0', '', 'abid2019-12-03.png', 50),
+(25, 'abid', '2019-12-04', '10:33:29', '02:33:42', '0', '', 'abid2019-12-04.png', 50),
+(26, 'abid', '2019-12-06', '09:23:37', '01:24:02', '0', 'aaaaaaa', 'abid2019-12-06.png', 75),
+(30, 'bayu', '2019-12-10', '07:56:52', '00:02:59', '0', '', 'bayu2019-12-10.png', 100),
+(31, 'abid', '2019-12-10', '07:57:28', '00:02:23', '0', '', 'abid2019-12-10.png', 100);
 
 -- --------------------------------------------------------
 
@@ -71,6 +77,7 @@ CREATE TABLE `admin` (
   `username` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `auth_key` varchar(32) COLLATE utf8_unicode_ci NOT NULL,
   `password_hash` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `role` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `password_reset_token` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `email` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `status` smallint(6) NOT NULL DEFAULT 10,
@@ -82,10 +89,12 @@ CREATE TABLE `admin` (
 -- Dumping data for table `admin`
 --
 
-INSERT INTO `admin` (`id`, `username`, `auth_key`, `password_hash`, `password_reset_token`, `email`, `status`, `created_at`, `updated_at`) VALUES
-(1, 'kadal', 'olnE7u7i-27bUg_hUf1DLDjig_NIWlgS', '$2y$13$t63w.mnAr8BAfvecqdqtG.jT3bwrHLVdM08ZDZjYCb3r4hp1Teyyy', NULL, 'kadal@gmail.com', 10, 1575164220, 1575164220),
-(2, 'bayu', 'dWu7pmEqouAbtUicyq3DHFWFlTebnuW1', '$2y$13$JowwO/xpj4678PUDwsSPkeTvZ/lUXZVd6UZC7tt6Had/T.fJFAbnW', NULL, 'bayu@gmail.com', 10, 1575169252, 1575169252),
-(3, 'abid', 'RxGvbLsv6ncpS5UCqvrF0dMbnxudcAvz', '$2y$13$qUKKYfOt7GiJW8srVMeWt.s6tGbTYmUVe4uH5xu/TMKtEfpVYrEsm', NULL, 'abid@gmail.com', 10, 1575169766, 1575169766);
+INSERT INTO `admin` (`id`, `username`, `auth_key`, `password_hash`, `role`, `password_reset_token`, `email`, `status`, `created_at`, `updated_at`) VALUES
+(1, 'kadal', 'olnE7u7i-27bUg_hUf1DLDjig_NIWlgS', '$2y$13$t63w.mnAr8BAfvecqdqtG.jT3bwrHLVdM08ZDZjYCb3r4hp1Teyyy', '0', NULL, 'kadal@gmail.com', 10, 1575164220, 1575164220),
+(2, 'bayu', 'dWu7pmEqouAbtUicyq3DHFWFlTebnuW1', '$2y$13$JowwO/xpj4678PUDwsSPkeTvZ/lUXZVd6UZC7tt6Had/T.fJFAbnW', '0', NULL, 'bayu@gmail.com', 10, 1575169252, 1575169252),
+(3, 'abid', 'RxGvbLsv6ncpS5UCqvrF0dMbnxudcAvz', '$2y$13$qUKKYfOt7GiJW8srVMeWt.s6tGbTYmUVe4uH5xu/TMKtEfpVYrEsm', '0', NULL, 'abid@gmail.com', 10, 1575169766, 1575169766),
+(4, 'Fany', 'c0dCVbdBd1C0OKKK0IrcvG7ZoVueGZ7S', '$2y$13$cgNRGprhoiFnleidFN/Fue0AyVas9ElrC2Z.GQZhTAj2VXIQ.64kW', '0', NULL, 'fany@gmail.com', 10, 1575937891, 1575937891),
+(5, 'lala', 'Dxjc2oO4auEpi-ECoukWXClMsCkPjObC', '$2y$13$1x35g7fHJsTUpdZAO0QiHuyE5ZOYJUe21P9vYRvM5t7MiHhRXqFGi', '1', NULL, 'lala@gmail.com', 10, 1575937954, 1575937954);
 
 -- --------------------------------------------------------
 
@@ -133,7 +142,8 @@ CREATE TABLE `point` (
 --
 
 INSERT INTO `point` (`id_point`, `id_pegawai`, `total_point`) VALUES
-(36, 'bayu', 225);
+(36, 'bayu', 825),
+(43, 'abid', 900);
 
 -- --------------------------------------------------------
 
@@ -196,19 +206,19 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT for table `absensi`
 --
 ALTER TABLE `absensi`
-  MODIFY `id_absensi` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+  MODIFY `id_absensi` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
 
 --
 -- AUTO_INCREMENT for table `admin`
 --
 ALTER TABLE `admin`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `point`
 --
 ALTER TABLE `point`
-  MODIFY `id_point` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=43;
+  MODIFY `id_point` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=44;
 
 --
 -- AUTO_INCREMENT for table `user`

@@ -19,6 +19,14 @@ $this->title = 'Signup';
                 <?= $form->field($model, 'username') ?>
                 <?= $form->field($model, 'email') ?>
                 <?= $form->field($model, 'password')->passwordInput() ?>
+                <?php
+                $listData=['Admin','User'];
+                echo $form->field($model, 'role')->dropDownList(
+                    $listData, 
+                    ['prompt'=>'Role','id'=>'role'],
+                    array('class'=>'form-control')
+                    );
+                ?>
                 <div class="form-group">
                     <?= Html::submitButton('Signup', ['class' => 'btn btn-primary', 'name' => 'signup-button']) ?>
                 </div>

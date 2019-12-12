@@ -236,36 +236,45 @@ $this->title = 'Create Pegawai';
                 <div class="col-md-6 col-sm-12">
                     <div class="card">
                         <h3>Informasi Kantor</h3>
-                        <p style="color:#8A8A8A;margin-bottom:0.5vh; margin-top:7vh">Username</p>
+                        <p style="color:#8A8A8A;margin-bottom:0.5vh; margin-top:7vh">Nama Lengkap</p>
+                        <?= $form->field($model,'nama')->textInput()->label(false) ?>
+                        <p style="color:#8A8A8A;margin-bottom:0.5vh; margin-top:3vh">Username</p>
                         <?= $form->field($model,'nama_pegawai')->textInput()->label(false) ?>
                         <p style="color:#8A8A8A;margin-bottom:0.5vh; margin-top:3vh">Password</p>
                         <?= $form->field($model,'password')->passwordInput()->label(false) ?>
-                        <p style="color:#8A8A8A;margin-bottom:0.5vh; margin-top:3vh">Id Point</p>
-                        <?= $form->field($model,'id_point')->textInput()->label(false) ?>
                         <div class="form-group field-pegawai-id_jabatan required">
                         <!-- <label class="control-label" for="pegawai-id_jabatan">Devisi</label> -->
                         <p style="color:#8A8A8A;margin-bottom:0.5vh; margin-top:3vh">Divisi</p>
                         <select class="form-control" id="pegawai-id_jabatan" name="Pegawai[id_jabatan]">
                                         
                                         <?php
-                                            foreach($dataPegawai as $row){
+                                            foreach($dataJabatan as $jbt){
                                         ?>
-                                            <option value= <?=$row['id_jabatan']?>><?=$row['nama_jabatan']?></option>
+                                            <option value= <?=$jbt['id_jabatan']?>><?=$jbt['nama_jabatan']?></option>
                                         <?php
                                             }
                                         ?>
-                                        </select>
+                        </select>
+                        <p style="color:#8A8A8A;margin-bottom:0.5vh; margin-top:3vh">Role</p>
+                        <?php
+                            $listData=['Admin','User'];
+                            echo $form->field($model, 'role')->dropDownList(
+                                $listData, 
+                                ['prompt'=>'Role','id'=>'role'],
+                                array('class'=>'form-control')
+                                )->label(false);
+                        ?>
                         <div class="help-block"></div>
                         </div>
                         
                         
                         
                         <!-- <?php
-                            foreach($dataPegawai as $row){
+                            foreach($dataJabatan as $jbtn){
                         ?>
                         <?= $form->field($model,'id_jabatan')->dropdownList([
                             
-                                $row['id_jabatan'] => $row['nama_jabatan'] 
+                                $jbtn['id_jabatan'] => $jbtn['nama_jabatan'] 
                                 
                             ],
                             ['class'=>"form-control",'prompt'=>'Pilih Jabatan']

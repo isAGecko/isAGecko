@@ -95,10 +95,11 @@ $this->title = 'Dashboard Admin';
     div {
         font-family: 'google_font';
     }
+
 </style>
 <div class="pegawai-index">
     <div class="backCard">
-        <h4 style="color:#245AA7">Hello ! Abidurochman</h4>
+        <h4 style="color:#245AA7">Hello ! <?php echo $login[0]['nama'];?> </h4>
         <p class="marge">Good morning ! have a nice day</p>
         <div class="row paddingCard">
             <div class="col-md-3 col-sm-4">
@@ -121,21 +122,14 @@ $this->title = 'Dashboard Admin';
 
             <div class="col-md-3 col-sm-4">
                 <div class="card">
-                    <span class="badge" style="background:#327D4D; width:auto;">Jumlah Pegawai</span>
-                    <h1 style="text-align:center;color:#327D4D"><?= $jml_pegawai?> Orang</h1>
-                    <p style="font-size:12px; text-align:center;color:#327D4D"> jumlah pegawai bulan ini</p>
+                    <span class="badge" style="background:#327D4D; width:auto;">Rata-Rata Point</span>
+                    <h1 style="text-align:center;color:#327D4D"><?= $dataPoint[0]['rata']?> Point</h1>
+                    <p style="font-size:12px; text-align:center;color:#327D4D"> Rata-rata point hari ini.</p>
                 </div>
             </div>
         </div>
     </div>
-    <?php
-        if(Yii::$app->session->hasFlash('Gagal')){
-            echo "<div class='alert alert-danger'>". Yii::$app->session->getFlash('Gagal')."</div>";
-        }
-        if(Yii::$app->session->hasFlash('Sukses')){
-            echo "<div class='alert alert-success'>". Yii::$app->session->getFlash('Sukses')."</div>";
-        }
-    ?>
+    
     <div class="backCard" style="width: 100%;">
     <h1 style="text-align:center;">Data Pegawai</h1>
     <p>
@@ -236,11 +230,16 @@ $this->title = 'Dashboard Admin';
                 </tr>
                 <?php
                     foreach($dataAbsensi as $row){
+                        if($row['keterangan']==0){
+                            $keterangan='Masuk';
+                        }else{
+                            $keterangan='Izin';
+                        }
                 ?>
                     <tr>
                         <td><?=$row['id_pegawai']?></td>
                         <td><?=$row['tanggal']?></td>
-                        <td><?=$row['keterangan']?></td>
+                        <td><?php echo $keterangan?></td>
                     </tr>
                 <?php
                     }
