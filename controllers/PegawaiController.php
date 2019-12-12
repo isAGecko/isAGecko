@@ -178,11 +178,11 @@ class PegawaiController extends Controller
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
      */
-    public function actionDelete($id)
+    public function actionHapus($id)
     {
         $this->findModel($id)->delete();
-
-        return $this->redirect(['index']);
+        
+        return $this->redirect(['pegawai/index']);
     }
 
     /**

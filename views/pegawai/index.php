@@ -176,8 +176,10 @@ $this->title = 'Dashboard Admin';
                         <td><?=$row['nama_pegawai']?></td>
                         <td><?=$row['nama_jabatan']?></td>
                         <td><?=$row['alamat']?></td>
-                        <td><?= Html::a('Update', ['pegawai/update', 'id'=>$row['id_pegawai']],['class'=>'label label-primary']) ?></td>
-                        <td><?= Html::a('Update', ['pegawai/delete', 'id'=>$row['id_pegawai']],['class'=>'label label-danger']) ?></td>
+                        <td>
+                            <?= Html::a('Update', ['pegawai/update', 'id'=>$row['id_pegawai']],['class'=>'label label-primary']) ?>
+                            <?= Html::a('Delete', ['pegawai/hapus', 'id'=>$row['id_pegawai']],['class'=>'label label-danger']) ?>
+                        </td>
                     </tr>
                 <?php
                     }
