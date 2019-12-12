@@ -114,7 +114,7 @@ $this->title = 'Dashboard Admin';
                     <div class="card">
                         <span class="badge" style="background:#F96478; width:auto;">Jumlah Absensi</span>
                         <h1 style="text-align:center;color:#F96478"><?= $jml_absensi?> Orang</h1>
-                        <p style="font-size:12px; text-align:center;color:#F96478"> Jumlah pegawai yang hadir</p>
+                        <p style="font-size:12px; text-align:center;color:#F96478"> Jumlah pegawai yang hadir hari ini</p>
                     </div>
                 </div>
             </a>
