@@ -38,6 +38,26 @@ class PegawaiController extends Controller
      * Lists all Pegawai models.
      * @return mixed
      */
+    public function actionCari()
+    {
+        if(Yii::$app->request->post()){
+            $tanggal = Yii::$app->request->post('tanggal');
+            $dataAbsensi = Yii::$app->db->createCommand("SELECT * FROM `absensi` WHERE `tanggal`='$tanggal'")
+                            ->queryAll();
+                            
+            return $this->redirect(['pegawai/index'], [
+                'dataAbsensi' => $dataAbsensi,
+            ]);
+                            
+            // $tanggal=$_POST['tanggal']['tanggal'];
+            // echo $tanggal;
+        }
+        // return $this->render('index', [
+            
+        //     'dataAbsensi' => $dataAbsensi,
+        // ]);
+    }
+    
     public function actionIndex()
     {
         $searchModel = new PegawaiSearch();
