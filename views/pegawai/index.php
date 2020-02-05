@@ -6,7 +6,7 @@ use yii\helpers\Url;
 use yii\helpers\Html;
 use yii\grid\GridView;
 use kartik\date\DatePicker;
-print_r($dataAbsensi);
+
 /* @var $this yii\web\View */
 /* @var $searchModel app\models\PegawaiSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
@@ -205,56 +205,8 @@ $this->title = 'Dashboard Admin';
             
         <h1 style="text-align:center;">Data Absensi</h1>
 
-        <?php
-            $form= ActiveForm::begin([
-                'method'=>'post',
-                'id'=>'tanggal',
-                'action'=>Url::to(['pegawai/cari']),
-            ]);
-        ?>
-        <div class="row" style="margin:3vh">
-            <div class="col-md-3">  
-            <?php
-            echo DatePicker::widget([
-                'name' => 'tanggal', 
-                'options' => ['placeholder' => 'Select issue date ...'],
-                'pluginOptions' => [
-                    'format' => 'yyyy-m-d',
-                    'todayHighlight' => true
-                ]
-            ]);
-            ?>
-            </div>
-            <div class="col-md-3">            
-            <?= Html::submitButton('Cari', ['class' => 'btn btn-primary']) ?>
-            </div>
-        </div>
-        <?php
-            ActiveForm::end();
-        ?>
         
-            <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
-
-            <!-- <?= GridView::widget([
-                'dataProvider' => $dataProvider, 
-                // 'filterModel' => $searchModel,
-                'columns' => [
-                    // ['class' => 'yii\grid\SerialColumn'],
-                
-
-                    // 'id_pegawai',
-                    // 'id_point',
-                    // 'id_jabatan',
-                    'nama_pegawai',
-                    'nomor_telp',
-                    //'alamat',
-                    //'email:email',
-                    //'gender',
-                    //'password',
-
-                    // ['class' => 'yii\grid\ActionColumn'],
-                ],
-            ]); ?> -->
+        
                 
 
             <table class="table table-bordered">
