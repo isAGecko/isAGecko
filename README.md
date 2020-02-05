@@ -5,7 +5,7 @@ Tolong jangan memperjualbelikan aplikasi ini, aplikasi ini bersifat opensource k
 
 <h2>Donate</h2>
 Dana: 082264046359
-<img src="https://photos.app.goo.gl/h5fL9Kt6ZfrwffAd7" alt="Dana akun"/>
+<a href="https://ibb.co/gw05XcF"><img src="https://i.ibb.co/TRQVnNq/shareqr.png" alt="shareqr" border="0"></a>
 <br>
 Demo: http://bit.ly/30DphoP
 <br>
