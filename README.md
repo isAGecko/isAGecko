@@ -1,15 +1,15 @@
-Yii-Bootstrap-Editable
+Aplikasi Absensi Dengan Tempat Terkini dan Foto
 ======================
 
-This extension joins [Yii framework](http://yiiframework.com) with [Bootstrap Editable plugin](http://vitalets.github.com/bootstrap-editable) allowing in-place editing with [Twitter Bootstrap](http://twitter.github.com/bootstrap) Form and Popover.
-Includes three widgets and one component that together give you extremely fast and easy way for creating editable interfaces. 
+Tolong jangan memperjualbelikan aplikasi ini, aplikasi ini bersifat opensource kalian bisa mengedit dengan sesuka hati kalian tapi tolong dengan sangat jangan memperjual belikan aplikasi ini
 
-## Demo & Documentation
-
-http://demopage.ru/yii-bootstrap-editable
-
-## Contributing
-Please make all pull requests against `dev` branch. Your feedback / contribution is very appreciated.
-
-## Questions
-If you have question please feel free to [create an issue](https://github.com/vitalets/yii-bootstrap-editable/issues).
+<h2>Donate</h2>
+Dana: 082264046359
+<img src="https://photos.app.goo.gl/h5fL9Kt6ZfrwffAd7" alt="Dana akun"/>
+<br>
+Demo: http://bit.ly/30DphoP
+<br>
+login: username: admin , password: adminadmin
+       username: budi , password: budibudi
+       
+Terima Kasih
